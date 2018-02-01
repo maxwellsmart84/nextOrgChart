@@ -1,0 +1,19 @@
+{
+  "name": "orgchartreactnode",
+  "version": "1.0.0",
+  "description": "Org Chart Built With Next.JS",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "test": "test"
+  },
+  "author": "Maxwell Krause",
+  "license": "ISC",
+  "dependencies": {
+    "next": "^4.2.3",
+    "react": "^16.2.0",
+    "react-d3-tree": "^1.8.0",
+    "react-dom": "^16.2.0",
+    "react-modal": "^3.1.11"
+  }
+}
