@@ -7,10 +7,10 @@ const linkStyle = {
 // figure out how to get rid of this and reuse header component
 const EmployeeBoxHeader = (props) => (
   <div>
-    <Link href="/index">
+    <Link href="/">
       <a style={linkstyle}>Back</a>
     </Link>
-     <Link href={`/employee?supervisoroId=${props.supervisorId}`}>
+     <Link ashref={`/employee?supervisorId=${props.supervisorId}`}>
         <a style={linkStyle}>Supervisor</a>
     </Link>
   </div>

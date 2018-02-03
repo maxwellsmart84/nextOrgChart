@@ -1,19 +1,11 @@
 import Link from 'next/link';
+import EmployeeLink from './EmployeeLink';
+import NavLink from './NavLink';
 
-const linkStyle = {
-  marginRight: 15,
+
+function Header(props) {
+  console.log(props)
+  return props.url.asPath === '/' ? <NavLink /> : <EmployeeLink />
 }
 
-const Header = (props) => (
-  <div>
-    <Link href="/">
-      <a style={linkstyle}>Home</a>
-    </Link>
-     <Link href="/csvimport">
-        <a style={linkStyle}>CSV Import</a>
-    </Link>
-    <Link href="/logout">
-        <a style={linkStyle}>Log Out</a>
-    </Link>
-  </div>
-)
+export default Header
