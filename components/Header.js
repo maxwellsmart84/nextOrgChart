@@ -1,10 +1,14 @@
 import Link from 'next/link';
+import Head from 'next/head';
 import EmployeeLink from './EmployeeLink';
 import NavLink from './NavLink';
 
-
 function Header(props) {
-  console.log(props)
+  <Head>
+    <title>{props.title}</title>
+    <meta name='viewport' content='initial-scale=1.0, width=device-width'></meta>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'/>
+  </Head>
   return props.url.asPath === '/' ? <NavLink /> : <EmployeeLink />
 }
 

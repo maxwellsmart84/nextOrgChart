@@ -1,13 +1,12 @@
 import Link from 'next/link';
-import Head from 'next/head';
-import Tree from 'react-d3-tree';
 import NoSSR from 'react-no-ssr';
 import axios from 'axios';
+import Tree from 'react-d3-tree';
+import Header from '../components/Header';
 
-import Layout from '../components/Layout'
 
 
-const myTreeData = [
+const data = [
   {
     name: 'Top Level',
     attributes: {
@@ -44,11 +43,12 @@ export default class extends React.Component {
   // }
   render() {
     return (
-      <Layout url={this.props.url} title={this.props}>
+      <div>
+        <Header url={this.props.url} title={this.props} />
         <NoSSR>
-          <Tree />
+          <Tree data={data} />
         </NoSSR>
-      </Layout>
+      </div>
     )
   }
 }

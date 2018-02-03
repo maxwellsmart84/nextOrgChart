@@ -32,14 +32,6 @@ var _link = require('next/dist/lib/link.js');
 
 var _link2 = _interopRequireDefault(_link);
 
-var _head = require('next/dist/lib/head.js');
-
-var _head2 = _interopRequireDefault(_head);
-
-var _reactD3Tree = require('react-d3-tree');
-
-var _reactD3Tree2 = _interopRequireDefault(_reactD3Tree);
-
 var _reactNoSsr = require('react-no-ssr');
 
 var _reactNoSsr2 = _interopRequireDefault(_reactNoSsr);
@@ -48,16 +40,20 @@ var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _Layout = require('../components/Layout');
+var _reactD3Tree = require('react-d3-tree');
 
-var _Layout2 = _interopRequireDefault(_Layout);
+var _reactD3Tree2 = _interopRequireDefault(_reactD3Tree);
+
+var _Header = require('../components/Header');
+
+var _Header2 = _interopRequireDefault(_Header);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _jsxFileName = '/Users/maxwellkrause/Documents/projects/atlatlEval/orgChartReactNode/pages/index.js?entry';
 
 
-var myTreeData = [{
+var data = [{
   name: 'Top Level',
   attributes: {
     keyA: 'val A',
@@ -99,17 +95,21 @@ var _class = function (_React$Component) {
     //   return;
     // }
     value: function render() {
-      return _react2.default.createElement(_Layout2.default, { url: this.props.url, title: this.props, __source: {
+      return _react2.default.createElement('div', {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 46
+        }
+      }, _react2.default.createElement(_Header2.default, { url: this.props.url, title: this.props, __source: {
           fileName: _jsxFileName,
           lineNumber: 47
         }
-      }, _react2.default.createElement(_reactNoSsr2.default, {
+      }), _react2.default.createElement(_reactNoSsr2.default, {
         __source: {
           fileName: _jsxFileName,
           lineNumber: 48
         }
-      }, _react2.default.createElement(_reactD3Tree2.default, {
-        __source: {
+      }, _react2.default.createElement(_reactD3Tree2.default, { data: data, __source: {
           fileName: _jsxFileName,
           lineNumber: 49
         }
@@ -121,4 +121,4 @@ var _class = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = _class;
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBhZ2VzL2luZGV4LmpzIl0sIm5hbWVzIjpbIkxpbmsiLCJIZWFkIiwiVHJlZSIsIk5vU1NSIiwiYXhpb3MiLCJMYXlvdXQiLCJteVRyZWVEYXRhIiwibmFtZSIsImF0dHJpYnV0ZXMiLCJrZXlBIiwia2V5QiIsImtleUMiLCJjaGlsZHJlbiIsInRyZWVTdHlsZSIsIndpZHRoIiwiaGVpZ2h0IiwicHJvcHMiLCJ1cmwiLCJSZWFjdCIsIkNvbXBvbmVudCJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsQUFBTzs7OztBQUNQLEFBQU87Ozs7QUFDUCxBQUFPOzs7O0FBQ1AsQUFBTzs7OztBQUNQLEFBQU87Ozs7QUFFUCxBQUFPLEFBQVk7Ozs7Ozs7OztBQUduQixJQUFNO1FBQ0osQUFDUSxBQUNOOztVQUFZLEFBQ0osQUFDTjtVQUZVLEFBRUosQUFDTjtVQUxKLEFBRWMsQUFHSixBQUVSO0FBTFksQUFDVjs7VUFLQSxBQUNRLEFBQ047O1lBQVksQUFDSixBQUNOO1lBRlUsQUFFSixBQUNOO1lBTkksQUFDUixBQUVjLEFBR0o7QUFISSxBQUNWO0FBSEosQUFDRSxHQUZNO1VBUmQsQUFBbUIsQUFDakIsQUFPWSxBQVNSLEFBQ1E7QUFEUixBQUNFO0FBakJOLEFBQ0UsQ0FGZTs7QUF3Qm5CLElBQU07U0FBWSxBQUNULEFBQ1A7VUFGRixBQUFrQixBQUVSO0FBRlEsQUFDaEI7Ozs7Ozs7Ozs7OztTQUtBOztBQUVBOztBQUNBO0FBQ0E7OzZCQUNTLEFBQ1A7NkJBQ0UsQUFBQyxrQ0FBTyxLQUFLLEtBQUEsQUFBSyxNQUFsQixBQUF3QixLQUFLLE9BQU8sS0FBcEMsQUFBeUM7b0JBQXpDO3NCQUFBLEFBQ0U7QUFERjtPQUFBLGtCQUNFLEFBQUM7O29CQUFEO3NCQUFBLEFBQ0U7QUFERjtBQUFBLHlCQUNFLEFBQUM7O29CQUFEO3NCQUhOLEFBQ0UsQUFDRSxBQUNFLEFBSVA7QUFKTztBQUFBOzs7OztFQVZtQixnQkFBTSxBIiwiZmlsZSI6ImluZGV4LmpzP2VudHJ5Iiwic291cmNlUm9vdCI6Ii9Vc2Vycy9tYXh3ZWxsa3JhdXNlL0RvY3VtZW50cy9wcm9qZWN0cy9hdGxhdGxFdmFsL29yZ0NoYXJ0UmVhY3ROb2RlIn0=
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBhZ2VzL2luZGV4LmpzIl0sIm5hbWVzIjpbIkxpbmsiLCJOb1NTUiIsImF4aW9zIiwiVHJlZSIsIkhlYWRlciIsImRhdGEiLCJuYW1lIiwiYXR0cmlidXRlcyIsImtleUEiLCJrZXlCIiwia2V5QyIsImNoaWxkcmVuIiwidHJlZVN0eWxlIiwid2lkdGgiLCJoZWlnaHQiLCJwcm9wcyIsInVybCIsIlJlYWN0IiwiQ29tcG9uZW50Il0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxBQUFPOzs7O0FBQ1AsQUFBTzs7OztBQUNQLEFBQU87Ozs7QUFDUCxBQUFPOzs7O0FBQ1AsQUFBTyxBQUFZOzs7Ozs7Ozs7QUFJbkIsSUFBTTtRQUNKLEFBQ1EsQUFDTjs7VUFBWSxBQUNKLEFBQ047VUFGVSxBQUVKLEFBQ047VUFMSixBQUVjLEFBR0osQUFFUjtBQUxZLEFBQ1Y7O1VBS0EsQUFDUSxBQUNOOztZQUFZLEFBQ0osQUFDTjtZQUZVLEFBRUosQUFDTjtZQU5JLEFBQ1IsQUFFYyxBQUdKO0FBSEksQUFDVjtBQUhKLEFBQ0UsR0FGTTtVQVJkLEFBQWEsQUFDWCxBQU9ZLEFBU1IsQUFDUTtBQURSLEFBQ0U7QUFqQk4sQUFDRSxDQUZTOztBQXdCYixJQUFNO1NBQVksQUFDVCxBQUNQO1VBRkYsQUFBa0IsQUFFUjtBQUZRLEFBQ2hCOzs7Ozs7Ozs7Ozs7U0FLQTs7QUFFQTs7QUFDQTtBQUNBOzs2QkFDUyxBQUNQOzZCQUNFLGNBQUE7O29CQUFBO3NCQUFBLEFBQ0U7QUFERjtBQUFBLE9BQUEsa0JBQ0UsQUFBQyxrQ0FBTyxLQUFLLEtBQUEsQUFBSyxNQUFsQixBQUF3QixLQUFLLE9BQU8sS0FBcEMsQUFBeUM7b0JBQXpDO3NCQURGLEFBQ0UsQUFDQTtBQURBOzBCQUNBLEFBQUM7O29CQUFEO3NCQUFBLEFBQ0U7QUFERjtBQUFBLHlCQUNFLEFBQUMsdUNBQUssTUFBTixBQUFZO29CQUFaO3NCQUpOLEFBQ0UsQUFFRSxBQUNFLEFBSVA7QUFKTzs7Ozs7O0VBWG1CLGdCQUFNLEEiLCJmaWxlIjoiaW5kZXguanM/ZW50cnkiLCJzb3VyY2VSb290IjoiL1VzZXJzL21heHdlbGxrcmF1c2UvRG9jdW1lbnRzL3Byb2plY3RzL2F0bGF0bEV2YWwvb3JnQ2hhcnRSZWFjdE5vZGUifQ==
