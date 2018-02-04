@@ -1,4 +1,3 @@
-import NoSSR from 'react-no-ssr';
 import Link from 'next/link';
 import axios from 'axios';
 import Tree from 'react-tree-graph';
