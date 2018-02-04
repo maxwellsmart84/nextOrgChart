@@ -1,39 +1,23 @@
-import Link from 'next/link';
 import NoSSR from 'react-no-ssr';
+import Link from 'next/link';
 import axios from 'axios';
-import Tree from 'react-d3-tree';
+import Tree from 'react-tree-graph';
 import Header from '../components/Header';
 
 
 
-const data = [
-  {
-    name: 'Top Level',
-    attributes: {
-      keyA: 'val A',
-      keyB: 'val B',
-      keyC: 'val C',
+const data = {
+  name: 'Top Level',
+  children: [
+    {
+      name: 'Level 2: A',
     },
-    children: [
-      {
-        name: 'Level 2: A',
-        attributes: {
-          keyA: 'val A',
-          keyB: 'val B',
-          keyC: 'val C',
-        },
-      },
-      {
-        name: 'Level 2: B',
-      },
-    ],
-  },
-];
-
-const treeStyle = {
-  width: '50em',
-  height: '20em'
+    {
+      name: 'Level 2: B',
+    },
+  ],
 }
+
 
 export default class extends React.Component {
   // static async getInitialProps() {
@@ -45,9 +29,7 @@ export default class extends React.Component {
     return (
       <div>
         <Header url={this.props.url} title={this.props} />
-        <NoSSR>
-          <Tree data={data} />
-        </NoSSR>
+          <Tree data={data} height={400} width={400}/>
       </div>
     )
   }

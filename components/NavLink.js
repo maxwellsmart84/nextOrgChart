@@ -19,9 +19,32 @@ const NavLink = (props) => (
         </Link>
       </li>
     </ul>
+    <input id='search' title="search"></input>
     <style jsx>{`
       a {
-        color:red
+        flex: 1;
+        color: white;
+        text-decoration: none;
+      }
+      ul {
+        width: 40%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
+      li {
+        flex: 1
+        align-items:center
+      }
+      #search {
+        flex: 1
+        background-color: gray;
+      }
+      div {
+        width: 100%;
+        background-color: black;
+        height: 2em;
+        display: flex;
       }
     `}</style>
   </div>
