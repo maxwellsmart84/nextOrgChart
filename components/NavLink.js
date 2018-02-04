@@ -22,7 +22,6 @@ const NavLink = (props) => (
     <input id='search' title="search"></input>
     <style jsx>{`
       a {
-        flex: 1;
         color: white;
         text-decoration: none;
       }
@@ -33,11 +32,9 @@ const NavLink = (props) => (
         justify-content: flex-start;
       }
       li {
-        flex: 1
         align-items:center
       }
       #search {
-        flex: 1
         background-color: gray;
       }
       div {

@@ -10,6 +10,7 @@ module.exports = db => {
 
 
   router.get('/employee', wrapAsync(controller.getEmployees))
+  router.post('/employee', wrapAsync(controller.insertEmployee))
 
   return router;
 }
