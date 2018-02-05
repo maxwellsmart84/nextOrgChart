@@ -27,11 +27,13 @@ const NavLink = (props) => (
       }
       ul {
         width: 40%;
+        list-style: none;
         display: flex;
         align-items: center;
         justify-content: flex-start;
       }
       li {
+        flex: 1
         align-items:center
       }
       #search {

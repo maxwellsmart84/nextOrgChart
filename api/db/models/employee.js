@@ -21,9 +21,8 @@ const EmployeeSchema = new mongoose.Schema ({
     type: Date,
   },
   supervisorId: {
-    type: ObjectId
+    type: String
   },
-  workers: [ this ],
 })
 
 module.exports = mongoose.model('Employee', EmployeeSchema);
