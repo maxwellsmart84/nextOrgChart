@@ -1,7 +1,10 @@
+'use strict';
+
+
 const mongoose = require('mongoose');
 
 
-const employeeSchema = new mongoose.Schema ({
+const EmployeeSchema = new mongoose.Schema ({
   firstName: {
     type: String,
     required: true,
@@ -18,8 +21,9 @@ const employeeSchema = new mongoose.Schema ({
     type: Date,
   },
   supervisorId: {
-    type: Number,
-  }
+    type: ObjectId
+  },
+  workers: [ this ],
 })
 
-module.exports = mongoose.model('Employees', employeeSchema);
+module.exports = mongoose.model('Employee', EmployeeSchema);

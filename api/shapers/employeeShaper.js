@@ -1,5 +1,5 @@
 
-exports.shapeEmployee = function (data) {
+exports.shapeEmployee = function(data) {
   if (!data) {
     return null;
   }
@@ -11,9 +11,11 @@ exports.shapeEmployee = function (data) {
   }
 }
 
-exports.shapeEmployees = function (data) {
+exports.shapeEmployees = function(data) {
   if (data.length === 0) {
     return [];
   }
-  return data.map(shapeEmployee);
+  return data.map((item) => {
+    return exports.shapeEmployee(item);
+  });
 }
