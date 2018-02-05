@@ -4,7 +4,7 @@ import Link from 'next/link';
 const EmployeeNode = ({node}) => {
   return (
     <div id='fml'>
-      <Link as={`employee/${node.firstName}${node.lastName}`} href={`/employee/${node.id}`}>
+      <Link as={`employee/${node.id}`} href={`/employee/${node.id}`}>
         <a>{node.name}</a>
       </Link>
       <p>{node.actror}</p>

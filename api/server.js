@@ -2,7 +2,6 @@ const express = require('express');
 const next = require('next');
 const router = require('./routes');
 const bodyParser = require('body-parser');
-// const { MongoClient } = require('mongodb');
 const mongoose = require('mongoose');
 
 const dev = process.env.NODE_ENV !== 'production'
