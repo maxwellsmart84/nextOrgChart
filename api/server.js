@@ -29,6 +29,13 @@ async function startApp() {
     //anything to api we let express router handle
     server.use('/api', router(db));
 
+    // all normal web requests go below here
+    server.get('employee/:id', (req, res) => {
+      const actualPage = '/employee'
+      const queryParams = req.params.id
+      app.render(req, res, actualPage, queryParams);
+    })
+
     server.get('*', (req, res) => {
       return handle(req, res)
     })

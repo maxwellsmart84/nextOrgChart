@@ -10,12 +10,8 @@ function Header(props) {
       <meta name='viewport' content='initial-scale=1.0, width=device-width'></meta>
       <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'/>
     </Head>
-    <style jsx global>{`
-      font: menlo;
-    `}
-    </style>
   </div>
-  return props.url.asPath === '/' ? <NavLink /> : <EmployeeLink />
+  return props.url.asPath === '/' ? <NavLink /> : <EmployeeLink url={props.url} />
 }
 
 export default Header

@@ -32,9 +32,6 @@ const initechOrg = {
   ]
 };
 
-const handleClick = () => {
-  Router.push('/employee');
-}
 
 
 export default class extends React.Component {
@@ -46,24 +43,28 @@ export default class extends React.Component {
       const employees = shapeEmployees(data);
       //TODO: need to find the null supervisorId not use index 0
       const treeData = buildTree(employees[0], employees);
-      console.log(treeData.id);
-      return { treeData };
+      console.log(treeData);
+      return { treeData, employees };
     }
     console.log('CLIENT GET')
     const data = await axios.get('http://localhost/api/employees');
     const employees = shapeEmployees(data);
     const treeData = buildTree(employees[0], employees)[0];
     console.log(treeData);
-    return { treeData };
+    return { treeData, employees };
   }
   render() {
+    console.log(this.props.employees)
+    const handleClick = (props) => {
+      Router.push(`/employee?id=${this.props.employees.id}`, `/employee/${id}`);
+    }
     return (
       <div>
         <div>
           <Header url={this.props.url} title={this.props} />
         </div>
         <div>
-          <Tree data={initechOrg} height={800} width={800} gProps={{ onClick: handleClick }} svgProps={{transform: 'rotate(90)'}}/>
+          <Tree data={this.props.treeData} height={800} width={800} gProps={{ onClick: handleClick }} svgProps={{transform: 'rotate(90)'}}/>
         </div>
       <style jsx global>{`
         body {
