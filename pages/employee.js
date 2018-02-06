@@ -5,9 +5,9 @@ import { shapeEmployees } from '../api/shapers/employeeShaper';
 import { buildTree } from '../api/utility';
 
 export default class extends React.Component {
-  static async getInitialProps ({ req }) {
+  static async getInitialProps ({ query, db }) {
     if (req) {
-      console.log('SERVER');
+      console.log('SERVER GET');
       const { db } = req;
       const data = await db.model('Employee').find({});
       const employees = shapeEmployees(data);
@@ -17,7 +17,7 @@ export default class extends React.Component {
       return { treeData };
     }
     console.log('CLIENT GET')
-    const data = await axios.get('http://localhost/api/employees');
+    const data = await axios.get(`http://localhost/api/employees?id=${query.id}`);
     const employees = shapeEmployees(data);
     const treeData = buildTree(employees[0], employees)[0];
     console.log(treeData);

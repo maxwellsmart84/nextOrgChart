@@ -74,7 +74,6 @@ export default class extends React.Component {
     const data = await axios.get('http://localhost/api/employees');
     const employees = shapeEmployees(data);
     const treeData = buildTree(employees[0], employees)[0];
-    console.log(treeData);
     return { treeData, employees };
   }
   render() {

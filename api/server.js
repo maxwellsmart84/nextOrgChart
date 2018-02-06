@@ -8,7 +8,7 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 // move to env
-const mongoPass = 'W1nterf3ll!'
+const mongoPass = ''
 // move this to an env
 const MONGO_URI = `mongodb://bearpear:${mongoPass}@cluster0-shard-00-00-mu6iv.mongodb.net:27017,cluster0-shard-00-01-mu6iv.mongodb.net:27017,cluster0-shard-00-02-mu6iv.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin`
 
@@ -29,13 +29,8 @@ async function startApp() {
     server.use('/api', router(db));
 
     // all normal web requests go below here
-    server.get('employee/:id', (req, res) => {
-      const actualPage = '/employee'
-      const queryParams = req.params.id
-      app.render(req, res, actualPage, queryParams);
-    })
 
-    server.get('*', (req, res) => {
+    server.get('*/', (req, res) => {
       return handle(req, res)
     })
 
