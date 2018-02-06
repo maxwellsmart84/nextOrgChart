@@ -4,7 +4,7 @@ import Link from 'next/link';
 const EmployeeNode = ({node}) => {
   return (
     <div>
-      <Link href={`/employee/${node.id}`}>
+      <Link href={`/employee?id=${node.id}`}>
         <a>{node.name}</a>
       </Link>
     <style jsx>{`

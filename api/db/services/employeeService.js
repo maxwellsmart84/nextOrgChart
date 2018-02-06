@@ -11,7 +11,6 @@ exports.getEmployee = function(id) {
 }
 
 exports.createEmployee = function(data) {
-  console.log('inside create',  data)
   return Employee.create(data);
 }
 

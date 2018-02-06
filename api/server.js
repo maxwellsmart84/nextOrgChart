@@ -31,7 +31,7 @@ async function startApp() {
 
     // all normal web requests go below here
 
-    server.get('*/', (req, res) => {
+    server.get('*', (req, res) => {
       return handle(req, res)
     })
 

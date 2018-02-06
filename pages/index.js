@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import axios from 'axios';
 // import EmployeeNode from '../components/EmployeeNode';
 import Header from '../components/Header';
 // import Tree from 'react-tree-graph';
+import axios from 'axios';
 import Tree from '../components/Tree';
 import OrgChart from 'react-orgchart';
 import { shapeEmployees } from '../api/shapers/employeeShaper';
@@ -68,16 +68,23 @@ export default class extends React.Component {
       const employees = shapeEmployees(data);
       //TODO: need to find the null supervisorId not use index 0
       const treeData = buildTree(employees[0], employees);
-      console.log(treeData);
       return { treeData, employees };
     }
-    const data = await axios.get('http://localhost/api/employees');
-    const employees = shapeEmployees(data);
-    const treeData = buildTree(employees[0], employees)[0];
+    const { data } = await axios.get('http://localhost:3000/api/employee');
+    const employees = [...data]
+    const treeData = buildTree(employees[0], employees);
+    // console.log('TREE CLIENT', treeData);
     return { treeData, employees };
   }
+
+  // async componentDidMount() {
+  //   console.log(data)
+  //   const data = await fetch('http://localhost/api/employees');
+  //   const employees = shapeEmployees(data);
+  //   const treeData = buildTree(employees[0], employees)[0];
+  //   return { treeData, employees };
+  // }
   render() {
-    console.log(this.props.employees)
     // const handleClick = (props) => {
     //   Router.push(`/employee?id=${this.props.employee.id}`, `/employee/${id}`);
     // }
@@ -87,7 +94,7 @@ export default class extends React.Component {
           <Header url={this.props.url} title={this.props} />
         </div>
         <div>
-          <Tree data={initechOrg} />
+          <Tree data={this.props.treeData} />
           {/* <Tree data={this.props.treeData} height={800} width={800} keyProp={} gProps={{ onClick: handleClick() }} svgProps={{transform: 'rotate(90)'}}/> */}
         </div>
       <style jsx global>{`

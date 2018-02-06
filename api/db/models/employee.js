@@ -17,8 +17,8 @@ const EmployeeSchema = new mongoose.Schema ({
     type: Number,
     required: true,
   },
-  startDate: {
-    type: Date,
+  title: {
+    type: String,
   },
   supervisorId: {
     type: String

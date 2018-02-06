@@ -16,9 +16,10 @@ exports.getEmployees = async function(req, res, next) {
 
 exports.getEmployee = async function (req, res, next) {
   const db = req.db;
-  const id = req.params.id;
-  const employee = await employeeService.getEmployee(id)
-  return shaper.shapeEmployee(employee);
+  const id = req.query.id;
+  const employee = await employeeService.getEmployee(id);
+  // i guess the above query returns array - strange - find out if we can get an object
+  return shaper.shapeEmployee();
 }
 
 exports.insertEmployee = async function(req, res, next) {

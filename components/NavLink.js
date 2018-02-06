@@ -4,7 +4,7 @@ const NavLink = (props) => (
   <div>
     <ul>
       <li>
-        <Link as='home' href='/'>
+        <Link href='/'>
           <a>Home</a>
         </Link>
       </li>
