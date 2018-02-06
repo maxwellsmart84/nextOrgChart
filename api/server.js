@@ -3,14 +3,15 @@ const next = require('next');
 const router = require('./routes');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
+dotenv.load();
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 // move to env
-const mongoPass = ''
 // move this to an env
-const MONGO_URI = `mongodb://bearpear:${mongoPass}@cluster0-shard-00-00-mu6iv.mongodb.net:27017,cluster0-shard-00-01-mu6iv.mongodb.net:27017,cluster0-shard-00-02-mu6iv.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin`
+const MONGO_URI = `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0-shard-00-00-mu6iv.mongodb.net:27017,cluster0-shard-00-01-mu6iv.mongodb.net:27017,cluster0-shard-00-02-mu6iv.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin`
 
 //special next js magic
 startApp();

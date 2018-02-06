@@ -1,1 +1,1 @@
-import react-modal from 'react-modal';
+// import react-modal from 'react-modal';
