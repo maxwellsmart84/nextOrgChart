@@ -26,7 +26,7 @@ render() {
   return (
       <div>
         <Header url={this.props.url} title={this.props.employee.name} />
-        <EmployeeCard name={this.props.employee.name}/>
+        <EmployeeCard name={this.props.employee.name} rank={this.props.employee.rank} />
         <style jsx global> {`
           body {
             background: #FFF;
