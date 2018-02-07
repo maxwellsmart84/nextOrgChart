@@ -1,7 +1,7 @@
 const Employee = require('../models/employee');
 
 
-exports.getEmployees = function(db) {
+exports.getEmployees = function() {
   return Employee.find({});
 }
 
@@ -18,7 +18,11 @@ exports.createEmployees = function(data) {
 }
 
 exports.updateEmployee = function(id, data) {
-  return Employee.findByIdAndUpdate(id, data, { new: true });
+  try {
+    Employee.findByIdAndUpdate(id, data, { new: true });
+  } catch(e) {
+    console.log(e);
+  }
 }
 
 exports.deleteEmployee = function(id) {

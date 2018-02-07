@@ -11,7 +11,9 @@ module.exports = db => {
 
   router.get('/employee', wrapAsync(controller.getEmployees))
   router.post('/employee', wrapAsync(controller.insertEmployee))
-  router.get('employee/:id', wrapAsync(controller.getEmployee))
+  router.get('/supervisors', wrapAsync(controller.getSupervisors))
+  router.patch('/employee/:id', wrapAsync(controller.updateEmployee))
+  router.get('/employee/:id', wrapAsync(controller.getEmployee))
 
   return router;
 }

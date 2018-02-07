@@ -18,14 +18,11 @@ exports.shapeEmployeeIn = function(data) {
   if (!data)
     return undefined;
   return {
-    _id: data.id ? data._id : undefined,
     name: data.name ? data.name : undefined,
     rank: data.rank ? data.rank : undefined,
     supervisorId: data. supervisorId ? data.supervisorId : undefined,
   }
 }
-
-exports.shap
 
 exports.shapeEmployeesOut = function(data) {
   if (data.length === 0) {

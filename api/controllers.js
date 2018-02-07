@@ -16,7 +16,7 @@ exports.getEmployees = async function(req, res, next) {
 
 exports.getEmployee = async function (req, res, next) {
   const db = req.db;
-  const id = req.query.id;
+  const id = req.params.id;
   const employee = await employeeService.getEmployee(id);
   return shaper.shapeEmployeeOut(employee);
 }
@@ -33,9 +33,8 @@ exports.insertEmployee = async function(req, res, next) {
 exports.updateEmployee = async function (req, res, next) {
   const db = req.db
   const data = req.body;
-  const id = req.query.id;
-
-  const shapedData = shaper.shapeEmployeIn(data);
+  const id = req.params.id;
+  const shapedData = shaper.shapeEmployeeIn(data);
   const updatedEmployee = await employeeService.updateEmployee(id, shapedData);
   return shaper.shapeEmployeeOut(updatedEmployee);
 }

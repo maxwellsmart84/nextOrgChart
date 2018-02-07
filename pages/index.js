@@ -9,6 +9,7 @@ import { shapeEmployeesOut } from '../api/shapers/employeeShaper';
 import { buildTree } from '../api/utility';
 import Router from 'next/router';
 
+const apiUrl = 'http://localhost:3000/api'
 
 
 const initechOrg = {
@@ -70,7 +71,7 @@ export default class extends React.Component {
       const treeData = buildTree(employees[0], employees);
       return { treeData, employees };
     }
-    const { data } = await axios.get('http://localhost:3000/api/employee');
+    const { data } = await axios.get(`${apiUrl}/employee`);
     const employees = [...data]
     const treeTop = employees.find((emp) => emp.supervisorId === null || emp.supervisorId === undefined )
     const treeData = buildTree(treeTop, employees);
@@ -86,9 +87,6 @@ export default class extends React.Component {
   //   return { treeData, employees };
   // }
   render() {
-    // const handleClick = (props) => {
-    //   Router.push(`/employee?id=${this.props.employee.id}`, `/employee/${id}`);
-    // }
     return (
       <div>
         <div>
@@ -106,18 +104,6 @@ export default class extends React.Component {
           margin: 0;
           padding: 0;
         }
-        // .node circle {
-        //   fill: white;
-        //   stroke: black;
-        // }
-        // g text{
-        //   transform: rotate(-90deg)
-        // }
-        // path.link {
-        //   fill: none;
-        //   stroke: black;
-        // }
-
     `}</style>
       </div>
     )
