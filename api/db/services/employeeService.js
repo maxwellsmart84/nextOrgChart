@@ -2,7 +2,7 @@ const Employee = require('../models/employee');
 
 
 exports.getEmployees = function() {
-  return Employee.find({});
+  return Employee.find({}).sort({rank: 1})
 }
 
 exports.getEmployee = function(id) {
@@ -28,5 +28,5 @@ exports.deleteEmployee = function(id) {
 exports.getSupervisorWorkers = function(supervisorId) {
   return Employee.find()
     .where({ supervisorId })
-
+    .sort({rank: 1})
 }
