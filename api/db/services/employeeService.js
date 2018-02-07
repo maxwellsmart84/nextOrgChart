@@ -1,5 +1,4 @@
 const Employee = require('../models/employee');
-const shapers = require('../../shapers/employeeShaper');
 
 
 exports.getEmployees = function(db) {
@@ -26,6 +25,8 @@ exports.deleteEmployee = function(id) {
   return Employee.findByIdAndRemove(id);
 }
 
-exports.getSupervisorEmployee = function(superVisorId) {
-  return Employee.find({ supervisorId })
+exports.getSupervisorWorkers = function(supervisorId) {
+  return Employee.find()
+    .where({ supervisorId })
+
 }

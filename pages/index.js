@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import axios from 'axios';
 import Tree from '../components/Tree';
 import OrgChart from 'react-orgchart';
-import { shapeEmployees } from '../api/shapers/employeeShaper';
+import { shapeEmployeesOut } from '../api/shapers/employeeShaper';
 import { buildTree } from '../api/utility';
 import Router from 'next/router';
 
@@ -65,14 +65,15 @@ export default class extends React.Component {
       console.log('SERVER');
       const { db } = req;
       const data = await db.model('Employee').find({});
-      const employees = shapeEmployees(data);
+      const employees = shapeEmployeesOut(data);
       //TODO: need to find the null supervisorId not use index 0
       const treeData = buildTree(employees[0], employees);
       return { treeData, employees };
     }
     const { data } = await axios.get('http://localhost:3000/api/employee');
     const employees = [...data]
-    const treeData = buildTree(employees[0], employees);
+    const treeTop = employees.find((emp) => emp.supervisorId === null || emp.supervisorId === undefined )
+    const treeData = buildTree(treeTop, employees);
     // console.log('TREE CLIENT', treeData);
     return { treeData, employees };
   }

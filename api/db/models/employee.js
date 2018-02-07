@@ -5,11 +5,7 @@ const mongoose = require('mongoose');
 
 
 const EmployeeSchema = new mongoose.Schema ({
-  firstName: {
-    type: String,
-    required: true,
-  },
-  lastName: {
+  name: {
     type: String,
     required: true,
   },

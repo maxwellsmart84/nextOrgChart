@@ -11,23 +11,33 @@ const employeeService = require('./db/services/employeeService');
 exports.getEmployees = async function(req, res, next) {
   const db = req.db;
   const employees = await employeeService.getEmployees(db);
-  return shaper.shapeEmployees(employees);
+  return shaper.shapeEmployeesOut(employees);
 }
 
 exports.getEmployee = async function (req, res, next) {
   const db = req.db;
   const id = req.query.id;
   const employee = await employeeService.getEmployee(id);
-  // i guess the above query returns array - strange - find out if we can get an object
-  return shaper.shapeEmployee();
+  return shaper.shapeEmployeeOut(employee);
 }
 
 exports.insertEmployee = async function(req, res, next) {
   const db = req.db;
   const data = req.body;
-  console.log('inside insert');
-  const newEmployee = await employeeService.createEmployee(data);
-  return shaper.shapeEmployee(newEmployee);
+
+  const shapedData = shaper.shapeEmployeIn(data);
+  const newEmployee = await employeeService.createEmployee(shapedData);
+  return shaper.shapeEmployeeOut(newEmployee);
+}
+
+exports.updateEmployee = async function (req, res, next) {
+  const db = req.db
+  const data = req.body;
+  const id = req.query.id;
+
+  const shapedData = shaper.shapeEmployeIn(data);
+  const updatedEmployee = await employeeService.updateEmployee(id, shapedData);
+  return shaper.shapeEmployeeOut(updatedEmployee);
 }
 
 exports.insertManyEmployees = async function(req, res, next) {
