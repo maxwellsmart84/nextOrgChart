@@ -1,6 +1,6 @@
 import { Component } from 'react';
-import EmployeeLink from './EmployeeLink';
 import axios from 'axios';
+import Link from 'next/link';
 
 const apiUrl = 'http://localhost:3000/api'
 
@@ -10,7 +10,7 @@ export default class EmployeeCard extends React.Component {
     this.state = {
       name: props.name,
       rank: props.rank,
-      supervisor: props.supervisor || null,
+      supervisor: props.supervisor || 'None',
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -31,36 +31,38 @@ export default class EmployeeCard extends React.Component {
       rank: rank || undefined,
       supervisorId: supervisorId || undefined,
     }
-    try {
-      const { data } = await axios.patch(`${apiUrl}/employee/${this.props.url.query.id}`, payload)
-    }catch(err) {
-      console.log(err)
-    }
+    const { data } = await axios.patch(`${apiUrl}/employee/${this.props.url.query.id}`, payload)
   }
 
   render() {
     return (
     <div id="formContainer">
+      <h1>Edit Employee</h1>
       <form onSubmit={this.handleSubmit}>
         <label>
           <h2>Name:</h2>
           <h3>{this.state.name}</h3>
-            <input name="name" placeholder={this.props.name} type="text" value={this.state.name} onChange={event => this.handleChange(event)} />
+            <input name="name" placeholder="Name" type="text" value={this.state.name} onChange={event => this.handleChange(event)} />
         </label>
+        <div>
+          <h1>Rank: {this.state.rank}</h1>
+        </div>
         <label>
-          <h2>Rank:</h2>
-          <h3>{this.state.rank}</h3>
-            <input name="rank" type="text" placeholder={this.props.rank} value={this.state.rank} onChange={event=> this.handleChange(event)} />
+            <input name="rank" type="text" placeholder="Rank" value={this.state.rank} onChange={event=> this.handleChange(event)} />
         </label>
-        <label>
-          <h2>Supervisor:</h2>
-            <select name="supervisor" type="text" placeholder={this.props.supervisorId || 'None'} onChange={this.state.supervisor || 'None'} />
-        </label>
+        <h2>Supervisor:</h2>
+        {/* <Link href={`/employee?id=${this.props.supervisor.id}`}> */}
+          <a>{this.state.supervisor.name}</a>
+        {/* </Link> */}
         <div>
           <button onClick={(e) => this.handleSubmit(e)}>SUBMIT</button>
         </div>
       </form>
       <style global jsx>{`
+      a {
+        text-decoration: none;
+        color: black
+      }
       #formContainer {
         width: 100%;
         border: black;

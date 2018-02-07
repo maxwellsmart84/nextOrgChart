@@ -9,26 +9,29 @@ const apiUrl = 'http://localhost:3000/api'
 export default class extends React.Component {
   static async getInitialProps ({ req, query }) {
     if (req) {
+      let supervisor = null;
       console.log('SERVER GET EMP PAGE');
       const { db } = req;
       const employeeId = query.id;
       const data = await db.model('Employee').findById(employeeId);
-      let supervisor = null;
-      console.log(data);
-      if (data && data.supervisorId !== null) {
-        supervisor = await db.model('Employee').findById(data.supervisorId);
-      }
       const employee = shapeEmployeeOut(data);
+      if (data && data.supervisorId !== null) {
+        // the employee's supervisor feteched from above
+        const superData = await db.model('Employee').findById(data.supervisorId);
+        supervisor = superData ? shapeEmployeeOut(superData) : null;
+        return { employee, supervisor };
+      }
       return { employee, supervisor };
     }
     let supervisor = null;
     const employeeId = query.id;
     const { data } = await axios.get(`${apiUrl}/employee/${employeeId}`);
-    if (data && data.supervisorId !== null) {
-      supervisor = await axios.get(`${apiUrl}/employee/${data.supervisorId}`);
-    }
     const employee = data;
-    console.log('CLIENT GRAB', employee);
+    if (data && data.supervisorId) {
+      const superData = await axios.get(`${apiUrl}/employee/${data.supervisorId}`);
+      supervisor = superData.data;
+      return { employee, supervisor };
+    }
     return { employee, supervisor };
   }
 

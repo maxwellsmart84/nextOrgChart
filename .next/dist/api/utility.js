@@ -7,21 +7,38 @@ var _set2 = _interopRequireDefault(_set);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //recurive function for assembling the d3 style tree
-exports.buildTree = function (item, list) {
-  console.log('BUILD TREE', item, list);
-  var currentId = item.id;
-  item.children = [];
-  for (var i = 0; i < list.length; i++) {
-    var emp = list[i];
-    if (emp.superVisorId === currentId) {
-      emp = buildTree(emp, list);
-      item.children.push(emp);
+exports.buildTree = function (arr) {
+  var tree = [],
+      mappedArr = {},
+      arrElem,
+      mappedElem;
+
+  // First map the nodes of the array to an object -> create a hash table.
+  for (var i = 0, len = arr.length; i < len; i++) {
+    arrElem = arr[i];
+    mappedArr[arrElem.id] = arrElem;
+    mappedArr[arrElem.id]['children'] = [];
+  }
+
+  for (var id in mappedArr) {
+    if (mappedArr.hasOwnProperty(id)) {
+      mappedElem = mappedArr[id];
+      // If the element is not at the root level, add it to its parent array of children.
+      if (mappedElem.supervisorId) {
+        mappedArr[mappedElem['supervisorId']]['children'].push(mappedElem);
+      }
+      // If the element is at the root level, add it to first level elements array.
+      else {
+          tree.push(mappedElem);
+        }
     }
   }
-  return item;
+  return tree;
 };
 
-exports.sortRank = function (item, list) {};
+// exports.sortRank = function(item, list) {
+
+// }
 
 exports.filterSupervisors = function (employees) {
   var supervisors = employees.map(function (emp) {
@@ -30,4 +47,4 @@ exports.filterSupervisors = function (employees) {
   //filter out dupes;
   return new _set2.default(supervisors);
 };
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwaS91dGlsaXR5LmpzIl0sIm5hbWVzIjpbImV4cG9ydHMiLCJidWlsZFRyZWUiLCJpdGVtIiwibGlzdCIsImNvbnNvbGUiLCJsb2ciLCJjdXJyZW50SWQiLCJpZCIsImNoaWxkcmVuIiwiaSIsImxlbmd0aCIsImVtcCIsInN1cGVyVmlzb3JJZCIsInB1c2giLCJzb3J0UmFuayIsImZpbHRlclN1cGVydmlzb3JzIiwiZW1wbG95ZWVzIiwic3VwZXJ2aXNvcnMiLCJtYXAiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7O0FBQ0E7QUFDQSxRQUFBLEFBQVEsWUFBWSxVQUFBLEFBQVMsTUFBVCxBQUFlLE1BQU0sQUFDdkM7VUFBQSxBQUFRLElBQVIsQUFBWSxjQUFaLEFBQTBCLE1BQTFCLEFBQWdDLEFBQ2hDO01BQU0sWUFBWSxLQUFsQixBQUF1QixBQUN2QjtPQUFBLEFBQUssV0FBTCxBQUFnQixBQUNoQjtPQUFJLElBQUksSUFBUixBQUFZLEdBQUcsSUFBSSxLQUFuQixBQUF3QixRQUF4QixBQUFnQyxLQUFLLEFBQ2pDO1FBQUksTUFBTSxLQUFWLEFBQVUsQUFBSyxBQUNmO1FBQUksSUFBQSxBQUFJLGlCQUFSLEFBQXlCLFdBQVcsQUFDbEM7WUFBTSxVQUFBLEFBQVUsS0FBaEIsQUFBTSxBQUFlLEFBQ3JCO1dBQUEsQUFBSyxTQUFMLEFBQWMsS0FBZCxBQUFtQixBQUN0QjtBQUNGO0FBQ0g7U0FBQSxBQUFPLEFBQ047QUFaRDs7QUFjQSxRQUFBLEFBQVEsV0FBVyxVQUFBLEFBQVMsTUFBVCxBQUFlLE1BQU0sQUFFdkMsQ0FGRDs7QUFJQSxRQUFBLEFBQVEsb0JBQW9CLFVBQUEsQUFBUyxXQUFXLEFBQzlDO01BQU0sd0JBQWMsQUFBVSxJQUFJLFVBQUEsQUFBQyxLQUFRLEFBQ3pDO1dBQU8sSUFBUCxBQUFXLEFBQ1o7QUFGRCxBQUFvQixBQUdwQixHQUhvQjtBQUlwQjtTQUFPLGtCQUFQLEFBQU8sQUFBUSxBQUNoQjtBQU5EIiwiZmlsZSI6InV0aWxpdHkuanMiLCJzb3VyY2VSb290IjoiL1VzZXJzL21heHdlbGxrcmF1c2UvRG9jdW1lbnRzL3Byb2plY3RzL2F0bGF0bEV2YWwvb3JnQ2hhcnRSZWFjdE5vZGUifQ==
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwaS91dGlsaXR5LmpzIl0sIm5hbWVzIjpbImV4cG9ydHMiLCJidWlsZFRyZWUiLCJhcnIiLCJ0cmVlIiwibWFwcGVkQXJyIiwiYXJyRWxlbSIsIm1hcHBlZEVsZW0iLCJpIiwibGVuIiwibGVuZ3RoIiwiaWQiLCJoYXNPd25Qcm9wZXJ0eSIsInN1cGVydmlzb3JJZCIsInB1c2giLCJmaWx0ZXJTdXBlcnZpc29ycyIsImVtcGxveWVlcyIsInN1cGVydmlzb3JzIiwibWFwIiwiZW1wIiwic3VwZXJWaXNvcklkIl0sIm1hcHBpbmdzIjoiOzs7Ozs7OztBQUNBO0FBQ0EsUUFBQSxBQUFRLFlBQVksVUFBQSxBQUFTLEtBQUssQUFDaEM7TUFBSSxPQUFKLEFBQVc7TUFDVCxZQURGLEFBQ2M7TUFEZCxBQUVFO01BRkYsQUFHRSxBQUVGOztBQUNBO09BQUssSUFBSSxJQUFKLEFBQVEsR0FBRyxNQUFNLElBQXRCLEFBQTBCLFFBQVEsSUFBbEMsQUFBc0MsS0FBdEMsQUFBMkMsS0FBSyxBQUM5QztjQUFVLElBQVYsQUFBVSxBQUFJLEFBQ2Q7Y0FBVSxRQUFWLEFBQWtCLE1BQWxCLEFBQXdCLEFBQ3hCO2NBQVUsUUFBVixBQUFrQixJQUFsQixBQUFzQixjQUF0QixBQUFvQyxBQUNyQztBQUdEOztPQUFLLElBQUwsQUFBUyxNQUFULEFBQWUsV0FBVyxBQUN4QjtRQUFJLFVBQUEsQUFBVSxlQUFkLEFBQUksQUFBeUIsS0FBSyxBQUNoQzttQkFBYSxVQUFiLEFBQWEsQUFBVSxBQUN2QjtBQUNBO1VBQUksV0FBSixBQUFlLGNBQWMsQUFDM0I7a0JBQVUsV0FBVixBQUFVLEFBQVcsaUJBQXJCLEFBQXNDLFlBQXRDLEFBQWtELEtBQWxELEFBQXVELEFBQ3hEO0FBQ0Q7QUFIQTtXQUlLLEFBQ0g7ZUFBQSxBQUFLLEtBQUwsQUFBVSxBQUNYO0FBQ0Y7QUFDRjtBQUNEO1NBQUEsQUFBTyxBQUNSO0FBNUJEOztBQThCQTs7QUFFQTs7QUFFQSxRQUFBLEFBQVEsb0JBQW9CLFVBQUEsQUFBUyxXQUFXLEFBQzlDO01BQU0sd0JBQWMsQUFBVSxJQUFJLFVBQUEsQUFBQyxLQUFRLEFBQ3pDO1dBQU8sSUFBUCxBQUFXLEFBQ1o7QUFGRCxBQUFvQixBQUdwQixHQUhvQjtBQUlwQjtTQUFPLGtCQUFQLEFBQU8sQUFBUSxBQUNoQjtBQU5EIiwiZmlsZSI6InV0aWxpdHkuanMiLCJzb3VyY2VSb290IjoiL1VzZXJzL21heHdlbGxrcmF1c2UvRG9jdW1lbnRzL3Byb2plY3RzL2F0bGF0bEV2YWwvb3JnQ2hhcnRSZWFjdE5vZGUifQ==

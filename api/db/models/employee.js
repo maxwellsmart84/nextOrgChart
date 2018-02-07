@@ -16,6 +16,9 @@ const EmployeeSchema = new mongoose.Schema ({
   title: {
     type: String,
   },
+  supervisor: {
+    type: Boolean,
+  },
   supervisorId: {
     type: String
   },

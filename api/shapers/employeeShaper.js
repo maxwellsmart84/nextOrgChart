@@ -5,7 +5,7 @@ exports.shapeEmployeeOut = function(data) {
     return null;
   }
     return {
-      id: data._id ? data._id : null,
+      id: data._id ? data._id.toString() : null,
       name: data.name ? data.name : null,
       rank: data.rank ? data.rank : null,
       supervisorId: data.supervisorId ? data.supervisorId : null,

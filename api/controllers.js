@@ -25,7 +25,7 @@ exports.insertEmployee = async function(req, res, next) {
   const db = req.db;
   const data = req.body;
 
-  const shapedData = shaper.shapeEmployeIn(data);
+  const shapedData = shaper.shapeEmployeeIn(data);
   const newEmployee = await employeeService.createEmployee(shapedData);
   return shaper.shapeEmployeeOut(newEmployee);
 }
