@@ -34,14 +34,10 @@ exports.updateEmployee = async function (req, res, next) {
   const db = req.db
   const data = req.body;
   const id = req.params.id;
+
   const shapedData = shaper.shapeEmployeeIn(data);
   const updatedEmployee = await employeeService.updateEmployee(id, shapedData);
   return shaper.shapeEmployeeOut(updatedEmployee);
-}
-
-exports.insertManyEmployees = async function(req, res, next) {
-  const db = req.db;
-
 }
 
 

@@ -92,11 +92,14 @@ export default class extends React.Component {
         <div>
           <Header url={this.props.url} title={this.props} />
         </div>
-        <div>
+        <div id="tree">
           <Tree data={this.props.treeData} />
           {/* <Tree data={this.props.treeData} height={800} width={800} keyProp={} gProps={{ onClick: handleClick() }} svgProps={{transform: 'rotate(90)'}}/> */}
         </div>
       <style jsx global>{`
+        #tree {
+          padding-top: 20px
+        }
         body {
           background: #FFF;
           font: 1rem menlo;

@@ -19,7 +19,6 @@ const NavLink = (props) => (
         </Link>
       </li>
     </ul>
-    <input id='search' title="search"></input>
     <style jsx>{`
       a {
         color: white;
@@ -35,9 +34,6 @@ const NavLink = (props) => (
       li {
         flex: 1
         align-items:center
-      }
-      #search {
-        background-color: gray;
       }
       div {
         width: 100%;

@@ -18,11 +18,7 @@ exports.createEmployees = function(data) {
 }
 
 exports.updateEmployee = function(id, data) {
-  try {
-    Employee.findByIdAndUpdate(id, data, { new: true });
-  } catch(e) {
-    console.log(e);
-  }
+  return Employee.findByIdAndUpdate(id, data, { new: true });
 }
 
 exports.deleteEmployee = function(id) {

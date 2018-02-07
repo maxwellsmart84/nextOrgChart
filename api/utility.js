@@ -7,7 +7,7 @@ exports.buildTree = function(item, list) {
   for(let i = 0; i < list.length; i++) {
       let emp = list[i];
       if (emp.superVisorId === currentId) {
-        emp = buildTree2(emp, list)
+        emp = buildTree(emp, list)
         item.children.push(emp);
     }
   }
