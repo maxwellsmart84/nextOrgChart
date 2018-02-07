@@ -22,9 +22,13 @@ export default class extends React.Component {
       console.log('EMPLOYEE SERVER', employee)
       return { employee, supervisor };
     }
+    let supervisor = null;
     const employeeId = query.id;
     const { data } = await axios.get(`http://localhost:3000/api/employee?id=${employeeId}`);
-    const employee = data[0];
+    if (data && data.supervisorId !== null) {
+      supervisor = await axios.get(`http://localhost:3000/api/employee?id=${data.supervisorId}`);
+    }
+    const employee = data;
     return { employee, supervisor };
   }
 
