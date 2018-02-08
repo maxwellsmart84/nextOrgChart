@@ -15,21 +15,23 @@ export default class EmployeeForm extends React.Component {
       supervisor: this.props.supervisor,
       makeSupervisor: false
     }
+    console.log(this.state)
+
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   handleChange = (event) => {
     event.preventDefault();
-    console.log(event.target.value)
     this.setState({
       [event.target.name]: event.target.value,
     })
   };
 
   handleClick = (event) => {
-    event.preventDefault();
-    this.setState({ makeSupervisor: e.target.checked });
+    console.log(event.target.checked)
+    this.setState({ makeSupervisor: event.target.checked });
   }
 
   handleSubmit = async (event) => {
@@ -46,34 +48,51 @@ export default class EmployeeForm extends React.Component {
   }
 
   render() {
+    const isMakeSupervisor = this.state.makeSupervisor;
+    let supervisorHeader = <h3>Employee will be added under: {this.state.supervisor.name}</h3>
+    if (isMakeSupervisor) {
+      supervisorHeader = null;
+    }
     return (
       <div id="formContainer">
         <h1>Add Employee</h1>
         <form onSubmit={this.handleSubmit}>
-          <h3>Employee will be added under: {this.state.supervisor.name}</h3>
+          {supervisorHeader}
           <label>
             <h3>Name: {this.state.name}</h3>
             <input name="name" placeholder="Name" type="text" value={this.state.name} onChange={event => this.handleChange(event)} />
           </label>
           <label>
             <h3>Title: {this.state.title}</h3>
-            <input title="title" placeholder="Title" type="text" value={this.state.title} onChange={event => this.handleChange(event)} />
+            <input name="title" placeholder="Title" type="text" value={this.state.title} onChange={event => this.handleChange(event)} />
           </label>
-          <label>
+          <div className="block">
             <h3>Make New Supervisor</h3>
-            <input name="makeSupervisor" type="checkbox" value={this.state.makeSupervisor} onclick={event => this.handleClick(event)} />
-          </label>
+            <input name="makeSupervisor" type="checkbox" checked={!!this.state.makeSupervisor} onClick={event => this.handleClick(event)} />
+          </div>
           <div>
             <button onClick={(e) => this.handleSubmit(e)}>SUBMIT</button>
           </div>
         </form>
         <style global jsx>{`
+        .block {
+          display: block;
+          width:40%;
+          padding-bottom: 40px;
+          padding-top: 20px;
+        }
+        .block h3 {
+          display: inline
+          margin-right: 10px
+        }
+        input[type=checkbox] {
+          display: inline-block
+        }
           #formContainer {
             width: 100%;
-            border: black;
-            border-style: solid;
             padding-bottom: 5%;
-            padding-left: 30%;
+            margin-left: 20%;
+            margin-right: 20%;
           }
           input[type=text] {
             width: 30%;
