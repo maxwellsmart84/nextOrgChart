@@ -7,9 +7,6 @@ const apiUrl = 'http://localhost:3000/api'
 export default class EmployeeCard extends React.Component {
   constructor(props) {
     super(props);
-    if (props.supervisor === undefined || props.supervisor === null) {
-      props.supervisor === 'None';
-    }
     this.state = {
       name: props.name,
       rank: props.rank,
@@ -29,8 +26,8 @@ export default class EmployeeCard extends React.Component {
     event.preventDefault();
     const { name, rank } = this.state;
     const payload = {
-      name: name || undefined,
-      rank: rank || undefined,
+      name,
+      rank,
     }
     console.log('PAYLOAD', payload)
     await axios.patch(`${apiUrl}/employee/${this.props.url.query.id}`, payload)
@@ -51,7 +48,7 @@ export default class EmployeeCard extends React.Component {
           <h1>Rank: {this.state.rank}</h1>
         </div>
         <label>
-            <input name="rank" type="number" min={this.props.supervisor.rank} max="100" placeholder="Rank" value={this.state.rank} onChange={event=> this.handleChange(event)} />
+            <input name="rank" type="number" min={this.props.supervisor ? this.props.supervisor.rank : 0} max="100" placeholder="Rank" value={this.state.rank} onChange={event=> this.handleChange(event)} />
         </label>
         <h2>Supervisor:</h2>
           <h3>{ this.props.supervisor ? this.props.supervisor.name : 'None'}</h3>

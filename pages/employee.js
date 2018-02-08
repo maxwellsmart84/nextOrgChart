@@ -15,7 +15,7 @@ export default class extends React.Component {
       const employeeId = query.id;
       const data = await db.model('Employee').findById(employeeId);
       const employee = shapeEmployeeOut(data);
-      if (data && data.supervisorId !== null) {
+      if (data && data.supervisorId !== 'None') {
         // the employee's supervisor feteched from above
         const superData = await db.model('Employee').findById(data.supervisorId);
         supervisor = shapeEmployeeOut(superData);
@@ -27,7 +27,7 @@ export default class extends React.Component {
     const employeeId = query.id;
     const { data } = await axios.get(`${apiUrl}/employee/${employeeId}`);
     const employee = data;
-    if (data && data.supervisorId) {
+    if (data && data.supervisorId !== 'None') {
       const superData = await axios.get(`${apiUrl}/employee/${data.supervisorId}`);
       supervisor = superData.data;
       return { employee, supervisor };
