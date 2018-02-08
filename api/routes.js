@@ -14,6 +14,7 @@ module.exports = db => {
   router.get('/supervisors', wrapAsync(controller.getSupervisors))
   router.patch('/employee/:id', wrapAsync(controller.updateEmployee))
   router.get('/employee/:id', wrapAsync(controller.getEmployee))
+  router.delete(`/employee/:id`, wrapAsync(controller.deleteEmployee))
 
   return router;
 }

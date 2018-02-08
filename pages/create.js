@@ -10,23 +10,22 @@ const apiUrl = '/api'
 export default class extends React.Component {
   static async getInitialProps({ req, query }) {
     if (req) {
-      console.log('SERVER GET EMP PAGE');
       const { db } = req;
-      const supervisorId = query.id;
-      const data = await db.model('Employee').findById(supervisorId);
+      const employeeId = query.id;
+      const employee = await db.model('Employee').findById(employeeId);
       const supervisor = shapeEmployeeOut(data);
-      return { supervisor };
+      return { employee };
     }
-    const supervisorId = query.id;
-    const { data } = await axios.get(`${apiUrl}/employee/${supervisorId}`);
-    const supervisor = data;
-    return { supervisor };
+    const employeeId = query.id;
+    const { data } = await axios.get(`${apiUrl}/employee/${employeeId}`);
+    const employee = data;
+    return { employee };
   }
   render() {
     return (
       <div>
-        <Header url={this.props.url} title={this.props.supervisor.name} />
-        <EmployeeForm supervisor={this.props.supervisor} />
+        <Header url={this.props.url} title={this.props.employee.name} />
+        <EmployeeForm employee={this.props.employee} />
         <style jsx global> {`
           body {
             background: #FFF;

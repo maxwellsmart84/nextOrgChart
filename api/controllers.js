@@ -6,20 +6,18 @@ const employeeService = require('./db/services/employeeService');
 
 
 exports.getEmployees = async function(req, res, next) {
-  const db = req.db;
-  const employees = await employeeService.getEmployees(db);
+  const employees = await employeeService.getEmployees();
   return shaper.shapeEmployeesOut(employees);
 }
 
 exports.getEmployee = async function(req, res, next) {
-  const db = req.db;
   const id = req.params.id;
+
   const employee = await employeeService.getEmployee(id);
   return shaper.shapeEmployeeOut(employee);
 }
 
 exports.insertEmployee = async function(req, res, next) {
-  const db = req.db;
   const data = req.body;
 
   const shapedData = shaper.shapeEmployeeIn(data);
@@ -28,14 +26,17 @@ exports.insertEmployee = async function(req, res, next) {
 }
 
 exports.updateEmployee = async function(req, res, next) {
-  const db = req.db
   const data = req.body;
   const id = req.params.id;
 
   const shapedData = shaper.shapeEmployeeIn(data);
-  console.log('SHAPED DATA', shapedData);
   const updatedEmployee = await employeeService.updateEmployee(id, shapedData);
   return shaper.shapeEmployeeOut(updatedEmployee);
+}
+
+exports.deleteEmployee = async function (req, res, next) {
+  const id = req.params.id;
+  await employeeService.deleteEmployee(id);
 }
 
 // exports.changeSupervisor = async function(req, res, next) {
