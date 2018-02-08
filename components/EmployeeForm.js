@@ -13,7 +13,9 @@ export default class EmployeeForm extends React.Component {
       rank: this.props.employee.rank + 1,
       title: '',
       employee: this.props.employee,
-      makeSupervisor: false
+      makeSupervisor: false,
+      saveCall: false,
+      isNotOwner: this.props.employee.supervisorId !== 'None',
     }
     console.log(this.state)
 
@@ -30,13 +32,12 @@ export default class EmployeeForm extends React.Component {
   };
 
   handleClick = (event) => {
-    console.log(event.target.checked)
     this.setState({ makeSupervisor: event.target.checked });
   }
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    const { name, rank, makeSupervisor } = this.state;
+    const { name, rank, title, makeSupervisor } = this.state;
     const payload = {
       name,
       rank: makeSupervisor ? this.props.employee.rank -1 : rank,
@@ -44,15 +45,21 @@ export default class EmployeeForm extends React.Component {
       //either make them the supervisor of the employee they clicked the box next to or inherit the existing and make them a worker
       supervisorId: makeSupervisor ? this.props.employee.supervisorId : this.props.employee.id,
     }
-    console.log(payload)
-    const { data } = await axios.post(`${apiUrl}/employee`, payload)
+    const { data } = await axios.post(`${apiUrl}/employee`, payload);
+    this.setState({ saveCall: true });
   }
 
   render() {
     const isMakeSupervisor = this.state.makeSupervisor;
+    const dataSaved = this.state.saveCall;
+    let savedText = null;
+
+    if (dataSaved) {
+      savedText = <span id="saved">Employee Information Updated</span>
+    }
     let supervisorHeader = <h3>Employee will be added under: {this.state.employee.name}</h3>
     if (isMakeSupervisor) {
-      supervisorHeader = null;
+      supervisorHeader = <h3>Employee will be made supervisor of: {this.state.employee.name}</h3>;
     }
     return (
       <div id="formContainer">
@@ -71,15 +78,22 @@ export default class EmployeeForm extends React.Component {
             <h3>Rank:{this.state.rank}</h3>
             <input name="rank" type="number" min={this.props.employee.rank} max="99" placeholder="Rank" value={this.state.rank} onChange={event => this.handleChange(event)} />
           </label>
-          <div id="checkboxBlock">
-            <h3>Make New Supervisor</h3>
-            <input name="makeSupervisor" type="checkbox" checked={!!this.state.makeSupervisor} onClick={event => this.handleClick(event)} />
-          </div>
+          {this.state.isNotOwner &&
+            <div id="checkboxBlock">
+              <h3>Make New Supervisor</h3>
+              <input name="makeSupervisor" type="checkbox" checked={!!this.state.makeSupervisor} onClick={event => this.handleClick(event)} />
+            </div>
+          }
           <div>
             <button onClick={(e) => this.handleSubmit(e)}>SAVE</button>
+            {savedText}
           </div>
         </form>
         <style global jsx>{`
+        #saved {
+          color:limegreen
+          padding-left: 20px;
+        }
         #checkboxBlock {
           display: block;
           width:40%;
@@ -109,8 +123,7 @@ export default class EmployeeForm extends React.Component {
           border: 3px solid #555;
         }
         button {
-          background-color: black
-          margin-left: 10%;
+          background-color: black;
           cursor: pointer;
           border: none;
           color: white;
@@ -119,6 +132,9 @@ export default class EmployeeForm extends React.Component {
           text-decoration: none;
           display: inline-block;
           font-size: 16px;
+        }
+        button:hover {
+          background-color: #79589F;
         }
       `}
         </style>

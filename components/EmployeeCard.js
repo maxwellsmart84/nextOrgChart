@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import Router from 'next/router';
 
 const apiUrl = '/api'
 
@@ -8,9 +9,10 @@ export default class EmployeeCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: props.name,
+      name: props.name || '',
       rank: props.rank,
-      title: props.title,
+      title: props.title || '',
+      saveCall: true,
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -32,17 +34,22 @@ export default class EmployeeCard extends React.Component {
       rank,
       title,
     }
-    await axios.patch(`${apiUrl}/employee/${this.props.url.query.id}`, payload)
-    alert('Employee Updated')
+    await axios.patch(`${apiUrl}/employee/${this.props.url.query.id}`, payload);
+    this.setState({ saveCall: true });
   }
 
   handleDelete = async (event) => {
     event.preventDefault();
-    await axios.delete(`${apiUrl}/employee/${this.props.url.query.id}`)
-    alert('Employee Deleted');
+    await axios.delete(`${apiUrl}/employee/${this.props.url.query.id}`);
+    Router.push('/');
   }
 
   render() {
+    const dataSaved = this.state.saveCall;
+    let savedText = null;
+    if (dataSaved) {
+      savedText = <span id="savedText">Employee Information Updated</span>
+    }
     return (
     <div id="formContainer">
       <h1>Edit Employee</h1>
@@ -62,10 +69,16 @@ export default class EmployeeCard extends React.Component {
         </label>
       </form>
         <div id="buttonBlock">
-          <button onClick={(e) => this.handleSubmit(e)}>SAVE</button>
+          <button id="save" onClick={(e) => this.handleSubmit(e)}>SAVE</button>
           <button id="delete" onClick={(e) => this.handleDelete(e)}>DELETE</button>
         </div>
+        {savedText}
+        <br />
       <style global jsx>{`
+      #savedText {
+      color:limegreen;
+      margin-left: 12px;
+      }
       #buttonBlock {
         padding-top:20px;
         margin-left: -10%
@@ -100,6 +113,12 @@ export default class EmployeeCard extends React.Component {
         text-decoration: none;
         display: inline-block;
         font-size: 16px;
+      }
+      #save {
+        margin-bottom: 20px
+      }
+      #save:hover {
+        background-color: #79589F;
       }
       #delete {
         background-color: #D11F33

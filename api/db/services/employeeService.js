@@ -25,18 +25,21 @@ exports.deleteEmployee = async function(id) {
   const employee = await exports.getEmployee(id);
   const employeeWorkers = await exports.getSupervisorWorkers(id);
   const employeeSupervisor = employee.supervisorId;
+  const employeeTitle = employee.title;
 
   console.log(employee, employeeWorkers, employeeSupervisor)
 
-
   if (employeeWorkers.length !== 0) {
-    // sorted by rank so lets make the highest rank the new supervisor
+    // sorted by rank so lets make the highest rank the new supervisor (employees of the same rank can be edited later)
     const newSuper = employeeWorkers[0]
-    for (let worker in employeeWorkers) {
+    const newWorkers = employeeWorkers.slice(1);
+    // much easier to work with async when you write your loops like this, map/filter/forEach all return promises
+    for (let i = 0; i < newWorkers.length; i++) {
+      const worker = newWorkers[i];
       await exports.updateEmployee(worker._id, { supervisorId: newSuper._id });
     }
-    // new supservisor's supervisor is the one being deleted.
-    await exports.updateEmployee(newSuper._id, { supervisorId: employeeSupervisor })
+    // new supservisor's  title and supervisor is the one of the employee being deleted.
+    await exports.updateEmployee(newSuper._id, { title: employeeTitle, supervisorId: employeeSupervisor })
   }
   return Employee.findByIdAndRemove(id);
 }

@@ -34,6 +34,10 @@ const EmployeeLink = (props) => (
         height: 2em;
         display: flex;
       }
+      a:hover {
+        color:black
+        font-weight: bold
+      }
     `}
     </style>
   </div>
