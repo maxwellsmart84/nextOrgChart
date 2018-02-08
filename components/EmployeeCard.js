@@ -7,10 +7,12 @@ const apiUrl = 'http://localhost:3000/api'
 export default class EmployeeCard extends React.Component {
   constructor(props) {
     super(props);
+    if (props.supervisor === undefined || props.supervisor === null) {
+      props.supervisor === 'None';
+    }
     this.state = {
       name: props.name,
       rank: props.rank,
-      supervisor: props.supervisor || 'None',
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -25,13 +27,14 @@ export default class EmployeeCard extends React.Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    const { name, rank, supervisorId } = this.state;
+    const { name, rank } = this.state;
     const payload = {
       name: name || undefined,
       rank: rank || undefined,
-      supervisorId: supervisorId || undefined,
     }
-    const { data } = await axios.patch(`${apiUrl}/employee/${this.props.url.query.id}`, payload)
+    console.log('PAYLOAD', payload)
+    await axios.patch(`${apiUrl}/employee/${this.props.url.query.id}`, payload)
+    alert('Employee Updated')
   }
 
   render() {
@@ -48,12 +51,10 @@ export default class EmployeeCard extends React.Component {
           <h1>Rank: {this.state.rank}</h1>
         </div>
         <label>
-            <input name="rank" type="text" placeholder="Rank" value={this.state.rank} onChange={event=> this.handleChange(event)} />
+            <input name="rank" type="number" min={this.props.supervisor.rank} max="100" placeholder="Rank" value={this.state.rank} onChange={event=> this.handleChange(event)} />
         </label>
         <h2>Supervisor:</h2>
-        {/* <Link href={`/employee?id=${this.props.supervisor.id}`}> */}
-          <a>{this.state.supervisor.name}</a>
-        {/* </Link> */}
+          <h3>{ this.props.supervisor ? this.props.supervisor.name : 'None'}</h3>
         <div>
           <button onClick={(e) => this.handleSubmit(e)}>SUBMIT</button>
         </div>
@@ -70,13 +71,13 @@ export default class EmployeeCard extends React.Component {
         padding-bottom: 5%;
         padding-left: 30%;
       }
-      input[type=text] {
+      input {
         width: 30%;
         padding: 12px 20px;
         margin: 8px 0;
         box-sizing: border-box;
       }
-      input[type=text]:focus {
+      input:focus {
         border: 3px solid #555;
       }
       `}

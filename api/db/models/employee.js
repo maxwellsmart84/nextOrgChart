@@ -20,7 +20,8 @@ const EmployeeSchema = new mongoose.Schema ({
     type: Boolean,
   },
   supervisorId: {
-    type: String
+    type: String,
+    required: true,
   },
 })
 

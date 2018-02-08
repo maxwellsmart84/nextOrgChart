@@ -33,14 +33,15 @@ exports.updateEmployee = async function(req, res, next) {
   const id = req.params.id;
 
   const shapedData = shaper.shapeEmployeeIn(data);
+  console.log('SHAPED DATA', shapedData);
   const updatedEmployee = await employeeService.updateEmployee(id, shapedData);
   return shaper.shapeEmployeeOut(updatedEmployee);
 }
 
-exports.changeSupervisor() = async function(req, res, next) {
-  const db = req.db;
-  const data = req.body;
-  const supervisors = await employeeService.getSupervisors()
-}
+// exports.changeSupervisor = async function(req, res, next) {
+//   const db = req.db;
+//   const data = req.body;
+//   const supervisors = await employeeService.getSupervisors()
+// }
 
 

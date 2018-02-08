@@ -65,32 +65,32 @@ export default class EmployeeForm extends React.Component {
           </div>
         </form>
         <style global jsx>{`
-      #formContainer {
-        width: 100%;
-        border: black;
-        border-style: solid;
-        padding-bottom: 5%;
-        padding-left: 30%;
-      }
-      input[type=text] {
-        width: 30%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        box-sizing: border-box;
-      }
-      input[type=text]:focus {
-        border: 3px solid #555;
-      }
-      button {
-        background-color: black
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-      }
+          #formContainer {
+            width: 100%;
+            border: black;
+            border-style: solid;
+            padding-bottom: 5%;
+            padding-left: 30%;
+          }
+          input[type=text] {
+            width: 30%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+          }
+          input[type=text]:focus {
+            border: 3px solid #555;
+          }
+          button {
+            background-color: black
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+          }
       `}
         </style>
       </div>

@@ -18,7 +18,7 @@ exports.buildTree = function(arr) {
     if (mappedArr.hasOwnProperty(id)) {
       mappedElem = mappedArr[id];
       // If the element is not at the root level, add it to its parent array of children.
-      if (mappedElem.supervisorId) {
+      if (mappedElem.supervisorId !== 'None') {
         mappedArr[mappedElem['supervisorId']]['children'].push(mappedElem);
       }
       // If the element is at the root level, add it to first level elements array.

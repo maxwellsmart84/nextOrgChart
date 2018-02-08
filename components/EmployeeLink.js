@@ -8,11 +8,6 @@ const EmployeeLink = (props) => (
           <a>Back</a>
         </Link>
       </li>
-      <li>
-      <Link href={`/employee?id=${props.supervisorId}`}>
-        <a>Supervisor</a>
-      </Link>
-      </li>
     </ul>
     <style jsx>{`
       a {

@@ -5,23 +5,21 @@ exports.shapeEmployeeOut = function(data) {
     return null;
   }
     return {
-      id: data._id ? data._id.toString() : null,
-      name: data.name ? data.name : null,
-      rank: data.rank ? data.rank : null,
-      supervisorId: data.supervisorId ? data.supervisorId : null,
+      id: data._id.toString(),
+      name: data.name,
+      rank: data.rank,
+      supervisorId: data.supervisorId ? data.supervisorId : 'None',
   }
-  console.log('shaped data', data)
 }
 
 // these are set to undefined cause i would rather nothing happen then null get inserted
 exports.shapeEmployeeIn = function(data) {
-  if (!data)
-    return undefined;
-  return {
-    name: data.name ? data.name : undefined,
-    rank: data.rank ? data.rank : undefined,
-    supervisorId: data. supervisorId ? data.supervisorId : undefined,
+  for (let item in data) {
+    if (data[item] === undefined || data[item] === null) {
+      delete data[item];
+    }
   }
+  return data
 }
 
 exports.shapeEmployeesOut = function(data) {

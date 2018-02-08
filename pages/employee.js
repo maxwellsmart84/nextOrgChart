@@ -18,7 +18,7 @@ export default class extends React.Component {
       if (data && data.supervisorId !== null) {
         // the employee's supervisor feteched from above
         const superData = await db.model('Employee').findById(data.supervisorId);
-        supervisor = superData ? shapeEmployeeOut(superData) : null;
+        supervisor = shapeEmployeeOut(superData);
         return { employee, supervisor };
       }
       return { employee, supervisor };
@@ -35,9 +35,6 @@ export default class extends React.Component {
     return { employee, supervisor };
   }
 
-  // handleSubmit = fields => {
-
-  // }
 
 render() {
   return (
