@@ -10,6 +10,7 @@ export default class EmployeeCard extends React.Component {
     this.state = {
       name: props.name,
       rank: props.rank,
+      title: props.title,
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -40,33 +41,37 @@ export default class EmployeeCard extends React.Component {
       <h1>Edit Employee</h1>
       <form onSubmit={this.handleSubmit}>
         <label>
-          <h2>Name:</h2>
-          <h3>{this.state.name}</h3>
-            <input name="name" placeholder="Name" type="text" value={this.state.name} onChange={event => this.handleChange(event)} />
+          <h3>Name: {this.state.name}</h3>
+          <input name="name" placeholder="Name" type="text" value={this.state.name} onChange={event => this.handleChange(event)} />
         </label>
-        <div>
-          <h1>Rank: {this.state.rank}</h1>
-        </div>
         <label>
-            <input name="rank" type="number" min={this.props.supervisor ? this.props.supervisor.rank : 0} max="100" placeholder="Rank" value={this.state.rank} onChange={event=> this.handleChange(event)} />
+          <h3>Title: {this.state.title}</h3>
+          <input title="title" placeholder="Title" type="text" value={this.state.title} onChange={event => this.handleChange(event)} />
         </label>
-        <h2>Supervisor:</h2>
-          <h3>{ this.props.supervisor ? this.props.supervisor.name : 'None'}</h3>
+        <label>
+          <h3>Rank:{this.state.rank}</h3>
+          <input name="rank" type="number" min={this.props.supervisor ? this.props.supervisor.rank : 0} max="100" placeholder="Rank" value={this.state.rank} onChange={event=> this.handleChange(event)} />
+        </label>
+          <h3>Supervisor: {this.props.supervisor ? this.props.supervisor.name : 'None'}</h3>
         <div>
-          <button onClick={(e) => this.handleSubmit(e)}>SUBMIT</button>
+          <div>
+            <button onClick={(e) => this.handleSubmit(e)}>SUBMIT</button>
+          </div>
         </div>
       </form>
       <style global jsx>{`
+      #rank: {
+
+      }
       a {
         text-decoration: none;
         color: black
       }
       #formContainer {
         width: 100%;
-        border: black;
-        border-style: solid;
         padding-bottom: 5%;
-        padding-left: 30%;
+        margin-left: 20%;
+        margin-right: 20%;
       }
       input {
         width: 30%;

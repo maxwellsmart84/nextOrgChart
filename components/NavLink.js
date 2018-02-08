@@ -25,6 +25,10 @@ const NavLink = (props) => (
         flex: 1
         align-items:center
       }
+      a:hover {
+        color:black
+        font-weight: bold
+      }
       div {
         width: 100%;
         background-color: #79589F;

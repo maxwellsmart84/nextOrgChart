@@ -8,11 +8,12 @@ exports.shapeEmployeeOut = function(data) {
       id: data._id.toString(),
       name: data.name,
       rank: data.rank,
+      title: data.title,
       supervisorId: data.supervisorId ? data.supervisorId : 'None',
   }
 }
 
-// these are set to undefined cause i would rather nothing happen then null get inserted
+// data sanitization
 exports.shapeEmployeeIn = function(data) {
   for (let item in data) {
     if (data[item] === undefined || data[item] === null) {

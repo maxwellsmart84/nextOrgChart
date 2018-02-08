@@ -10,9 +10,9 @@ const EmployeeNode = ({node}) => {
         <Link href={`/employee?id=${node.id}`}>
           <a id="name">{node.name}</a>
         </Link>
-        <span className ="rank">{node.rank}</span>
+        <span id={node.rank} className="rank">{node.rank}</span>
         <div>
-          <span id="title">title</span>
+          <span id="title">{node.title}</span>
         </div>
     <style jsx>{`
     .rank {

@@ -10,7 +10,6 @@ export default class extends React.Component {
   static async getInitialProps ({ req, query }) {
     if (req) {
       let supervisor = null;
-      console.log('SERVER GET EMP PAGE');
       const { db } = req;
       const employeeId = query.id;
       const data = await db.model('Employee').findById(employeeId);
@@ -40,7 +39,7 @@ render() {
   return (
       <div>
         <Header url={this.props.url} title={this.props.employee.name} />
-        <EmployeeCard url={this.props.url} name={this.props.employee.name} rank={this.props.employee.rank} supervisor={this.props.supervisor || undefined} />
+        <EmployeeCard url={this.props.url} name={this.props.employee.name} title={this.props.employee.title} rank={this.props.employee.rank} supervisor={this.props.supervisor || undefined} />
         <style jsx global> {`
           body {
             background: #FFF;

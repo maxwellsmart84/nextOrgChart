@@ -50,17 +50,14 @@ export default class EmployeeForm extends React.Component {
       <div id="formContainer">
         <h1>Add Employee</h1>
         <form onSubmit={this.handleSubmit}>
-          <h2>Employee will be added under:</h2>
-          <h3>{this.state.supervisor.name}</h3>
+          <h3>Employee will be added under: {this.state.supervisor.name}</h3>
           <label>
-            <h2>Name:</h2>
-            <h3>{this.state.name}</h3>
-            <input name="name" placeholder='Name' type="text" value={this.state.name} onChange={event => this.handleChange(event)} />
+            <h3>Name: {this.state.name}</h3>
+            <input name="name" placeholder="Name" type="text" value={this.state.name} onChange={event => this.handleChange(event)} />
           </label>
           <label>
-            <h2>Title:</h2>
-            <h3>{this.state.title}</h3>
-            <input name="title" placeholder='Title' type="text" value={this.state.title} onChange={event => this.handleChange(event)} />
+            <h3>Title: {this.state.title}</h3>
+            <input title="title" placeholder="Title" type="text" value={this.state.title} onChange={event => this.handleChange(event)} />
           </label>
           <label>
             <h3>Make New Supervisor</h3>

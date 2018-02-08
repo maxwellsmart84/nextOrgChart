@@ -18,7 +18,6 @@ export default class extends React.Component {
       const data = await db.model('Employee').find({});
       const employees = shapeEmployeesOut(data);
       const treeData = buildTree(employees)[0];
-      console.log('treeData', treeData)
       return { treeData, employees };
     }
     const { data } = await axios.get(`${apiUrl}/employee`);
