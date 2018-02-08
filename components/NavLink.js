@@ -4,18 +4,8 @@ const NavLink = (props) => (
   <div>
     <ul>
       <li>
-        <Link href='/'>
-          <a>Home</a>
-        </Link>
-      </li>
-      <li>
         <Link as='/csv' href={`/csv`}>
-          <a>CSV Import</a>
-        </Link>
-      </li>
-      <li>
-        <Link as='/logout' href={`/logout`}>
-          <a>Logout</a>
+          <a>Seed Data</a>
         </Link>
       </li>
     </ul>
@@ -37,7 +27,7 @@ const NavLink = (props) => (
       }
       div {
         width: 100%;
-        background-color: black;
+        background-color: #79589F;
         height: 2em;
         display: flex;
       }

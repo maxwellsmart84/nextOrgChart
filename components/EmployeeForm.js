@@ -2,7 +2,7 @@ import { Component } from 'react';
 import axios from 'axios';
 
 
-const apiUrl = 'http://localhost:3000/api'
+const apiUrl = '/api'
 
 
 export default class EmployeeForm extends React.Component {
@@ -11,6 +11,7 @@ export default class EmployeeForm extends React.Component {
     this.state = {
       name: '',
       rank: this.props.supervisor.rank + 1,
+      title: '',
       supervisor: this.props.supervisor,
       makeSupervisor: false
     }
@@ -35,7 +36,7 @@ export default class EmployeeForm extends React.Component {
     event.preventDefault();
     const { name, rank, makeSupervisor } = this.state;
     const payload = {
-      name: name || undefined,
+      name,
       rank: makeSupervisor ? rank -1 : rank,
       //either make them the supervisor of the employee they clicked the box next to or inherit the existing and make them a worker
       supervisorId: makeSupervisor ? this.props.supervisor.supervisorId : this.props.supervisor.id,
@@ -55,6 +56,11 @@ export default class EmployeeForm extends React.Component {
             <h2>Name:</h2>
             <h3>{this.state.name}</h3>
             <input name="name" placeholder='Name' type="text" value={this.state.name} onChange={event => this.handleChange(event)} />
+          </label>
+          <label>
+            <h2>Title:</h2>
+            <h3>{this.state.title}</h3>
+            <input name="title" placeholder='Title' type="text" value={this.state.title} onChange={event => this.handleChange(event)} />
           </label>
           <label>
             <h3>Make New Supervisor</h3>
@@ -84,6 +90,7 @@ export default class EmployeeForm extends React.Component {
           button {
             background-color: black
             border: none;
+            margin-left: 10%;
             color: white;
             padding: 10px 20px;
             text-align: center;

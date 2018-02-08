@@ -4,7 +4,7 @@ import axios from 'axios';
 import { shapeEmployeesOut, shapeEmployeeOut } from '../api/shapers/employeeShaper';
 import { buildTree } from '../api/utility';
 
-const apiUrl = 'http://localhost:3000/api'
+const apiUrl = '/api'
 
 export default class extends React.Component {
   static async getInitialProps ({ req, query }) {

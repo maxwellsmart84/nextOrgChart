@@ -11,9 +11,12 @@ const EmployeeNode = ({node}) => {
           <a id="name">{node.name}</a>
         </Link>
         <span className ="rank">{node.rank}</span>
+        <div>
+          <span id="title">title</span>
+        </div>
     <style jsx>{`
     .rank {
-      background: #cccccc;
+      background: black;
       border-radius: 0.8em;
       -moz-border-radius: 0.8em;
       -webkit-border-radius: 0.8em;
@@ -28,8 +31,13 @@ const EmployeeNode = ({node}) => {
       text-decoration: none;
       color: black;
     }
+    #name {
+      padding-left: 5px;
+      padding-right: 5px;
+    }
     #name:hover {
-      color: red;
+      color: #79589F;
+      font-weight: bold;
     }
     #plus {
       color: #cccccc;
@@ -38,6 +46,9 @@ const EmployeeNode = ({node}) => {
     }
     #plus:hover {
       color:limegreen
+    }
+    #title {
+      font-size:.8rem
     }
   `}</style>
   </div>

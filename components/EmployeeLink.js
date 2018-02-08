@@ -30,7 +30,7 @@ const EmployeeLink = (props) => (
       }
       div {
         width: 100%;
-        background-color: black;
+        background-color: #79589F;
         height: 2em;
         display: flex;
       }

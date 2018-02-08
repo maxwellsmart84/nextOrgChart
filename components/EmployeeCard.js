@@ -77,6 +77,17 @@ export default class EmployeeCard extends React.Component {
       input:focus {
         border: 3px solid #555;
       }
+      button {
+        background-color: black
+        margin-left: 10%;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+      }
       `}
       </style>
     </div>
