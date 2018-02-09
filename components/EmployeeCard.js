@@ -52,7 +52,7 @@ export default class EmployeeCard extends React.Component {
     if (this.state.name === undefined || this.state.name === '') {
       this.setState({ nameInvalid: true })
     }
-    else if (this.state.rank < this.props.supervisor.rank) {
+    else if (this.state.isNotOwner && (this.state.rank < this.props.supervisor.rank)) {
       this.setState ({ rankInvalid: true })
     } else {
       const { name, rank, title } = this.state;
@@ -61,6 +61,7 @@ export default class EmployeeCard extends React.Component {
         rank,
         title,
       }
+      console.log('Payload', payload);
       await axios.patch(`${apiUrl}/employee/${this.props.url.query.id}`, payload);
       this.setState({ saveCall: true });
     }
