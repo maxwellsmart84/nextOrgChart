@@ -15,6 +15,7 @@ export default class EmployeeCard extends React.Component {
       saveCall: false,
       nameInvalid: false,
       rankInvalid: false,
+      titleInvalid: false,
       isText: true,
       isNotOwner: this.props.supervisor && this.props.supervisor.id !== 'None',
     }
@@ -48,8 +49,14 @@ export default class EmployeeCard extends React.Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    if (this.state.name === undefined || this.state.name === '') {
+    const nameRegEx = RegExp('[\w\s.]')
+    const titleRegEx = RegExp('[\w\s.][0-9]');
+
+    if (this.state.name === undefined || this.state.name === '' || !stringRegEx.test(this.state.name)) {
       this.setState({ nameInvalid: true })
+    }
+    else if (!titleRegEx.test(this.state.title)) {
+      this.setState ({ titleInvalid: true })
     }
     else if (this.state.rank < this.props.rank) {
       this.setState ({ rankInvalid: true })
@@ -76,6 +83,7 @@ export default class EmployeeCard extends React.Component {
     let savedText = null;
     let nameError = null;
     let rankError = null;
+    let titleError = null;
     const highestWorkerRank = this.props.workers.length !== 0 ? this.props.workers[0].rank : 99;
 
     if (this.state.nameInvalid) {
@@ -103,12 +111,15 @@ export default class EmployeeCard extends React.Component {
           <h3>Title: {this.props.title}</h3>
         </label>
         <input name="title" placeholder="Title" type="text" value={this.state.title} onChange={event => this.handleChange(event)} />
+        <div>
+          {titleError}
+        </div>
         <label>
           <h3>Rank: {this.state.rank}</h3>
         </label>
         <input name="rank" type="number" min={this.props.supervisor ? this.props.supervisor.rank : 0} max={highestWorkerRank} placeholder="Rank" value={this.state.rank} onChange={event=> this.handleChange(event)} />
         <div>
-        {rankError}
+          {rankError}
         </div>
       </form>
         <div id="buttonBlock">

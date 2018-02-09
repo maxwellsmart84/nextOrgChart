@@ -16,6 +16,7 @@ export default class EmployeeForm extends React.Component {
       saveCall: false,
       nameInvalid: false,
       rankInvalid: false,
+      titleInvalid: false,
       isNotOwner: props.supervisorId !== 'None',
     }
     this.handleChange = this.handleChange.bind(this)
@@ -48,8 +49,14 @@ export default class EmployeeForm extends React.Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    if (this.state.name === undefined || this.state.name === '') {
+    const nameRegEx = RegExp('[\w\s.]')
+    const titleRegEx = RegExp('[\w\s.][0-9]');
+
+    if (this.state.name === undefined || this.state.name === '' || !stringRegEx.test(this.state.name)) {
         this.setState({ nameInvalid: true })
+      }
+      else if (!titleRegEx.test(this.state.title)) {
+        this.setState ({ titleInvalid: true })
       }
       else if (this.state.rank < this.props.rank) {
         this.setState ({ rankInvalid: true })
@@ -76,9 +83,13 @@ export default class EmployeeForm extends React.Component {
     let savedText = null;
     let nameError = null;
     let rankError = null;
+    let titleError = null;
 
     if (this.state.nameInvalid) {
       nameError = <span className="error">Name Required</span>
+    }
+    if (this.state.titleInvalid) {
+      titleError = <span className="error">Title cannot include special characters</span>
     }
     if (this.state.rankInvalid) {
       rankError = <span className="error">Rank out of bounds</span>
@@ -106,6 +117,9 @@ export default class EmployeeForm extends React.Component {
             <h3>Title: {this.state.title}</h3>
             <input name="title" placeholder="Title" type="text" value={this.state.title} onChange={event => this.handleChange(event)} />
           </label>
+          <div>
+            {titleError}
+          </div>
           {!this.state.makeSupervisor &&
           <label>
             <h3>Rank: {this.state.rank}</h3>
