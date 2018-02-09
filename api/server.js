@@ -36,8 +36,12 @@ async function startApp() {
     })
 
     server.listen(3000, (err) => {
-      if (err) throw err
-      console.log('> Ready on http://localhost:3000')
+      if (err) {
+        throw err
+      }
+      if (dev) {
+        console.log('> Ready on http://localhost:3000')
+      }
     })
   } catch(err) {
     console.error(err.stack)

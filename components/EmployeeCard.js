@@ -76,8 +76,8 @@ export default class EmployeeCard extends React.Component {
         <br />
       <style global jsx>{`
       #savedText {
-      color:limegreen;
-      margin-left: 12px;
+        color:limegreen;
+        margin-left: 12px;
       }
       #buttonBlock {
         padding-top:20px;

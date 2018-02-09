@@ -1,6 +1,5 @@
 
 exports.shapeEmployeeOut = function(data) {
-  console.log(data)
   if (!data) {
     return null;
   }

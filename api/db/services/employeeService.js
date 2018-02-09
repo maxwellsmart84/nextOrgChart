@@ -27,7 +27,6 @@ exports.deleteEmployee = async function(id) {
   const employeeSupervisor = employee.supervisorId;
   const employeeTitle = employee.title;
 
-  console.log(employee, employeeWorkers, employeeSupervisor)
 
   if (employeeWorkers.length !== 0) {
     // sorted by rank so lets make the highest rank the new supervisor (employees of the same rank can be edited later)

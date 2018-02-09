@@ -17,7 +17,6 @@ export default class EmployeeForm extends React.Component {
       saveCall: false,
       isNotOwner: this.props.employee.supervisorId !== 'None',
     }
-    console.log(this.state)
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
