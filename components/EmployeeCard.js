@@ -64,7 +64,7 @@ export default class EmployeeCard extends React.Component {
           <input name="title" placeholder="Title" type="text" value={this.state.title} onChange={event => this.handleChange(event)} />
         </label>
         <label>
-          <h3>Rank:{this.state.rank}</h3>
+          <h3>Rank: {this.state.rank}</h3>
           <input name="rank" type="number" min={this.props.supervisor ? this.props.supervisor.rank : 0} max="99" placeholder="Rank" value={this.state.rank} onChange={event=> this.handleChange(event)} />
         </label>
       </form>

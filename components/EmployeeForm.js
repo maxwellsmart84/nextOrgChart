@@ -75,7 +75,7 @@ export default class EmployeeForm extends React.Component {
             <input name="title" placeholder="Title" type="text" value={this.state.title} onChange={event => this.handleChange(event)} />
           </label>
           <label>
-            <h3>Rank:{this.state.rank}</h3>
+            <h3>Rank: {this.state.rank}</h3>
             <input name="rank" type="number" min={this.props.employee.rank} max="99" placeholder="Rank" value={this.state.rank} onChange={event => this.handleChange(event)} />
           </label>
           {this.state.isNotOwner &&
