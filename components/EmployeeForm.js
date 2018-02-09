@@ -54,7 +54,7 @@ export default class EmployeeForm extends React.Component {
     if (this.state.name === undefined || this.state.name === '') {
         this.setState({ nameInvalid: true })
       }
-      else if (this.state.rank < this.props.rank) {
+      else if (this.state.rank <= this.props.rank) {
         this.setState ({ rankInvalid: true })
       } else {
         const { name, rank, title, makeSupervisor } = this.state;

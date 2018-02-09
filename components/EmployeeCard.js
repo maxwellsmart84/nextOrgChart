@@ -49,11 +49,10 @@ export default class EmployeeCard extends React.Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-
     if (this.state.name === undefined || this.state.name === '') {
       this.setState({ nameInvalid: true })
     }
-    else if (this.state.rank < this.props.rank) {
+    else if (this.state.rank < this.props.supervisor.rank) {
       this.setState ({ rankInvalid: true })
     } else {
       const { name, rank, title } = this.state;
