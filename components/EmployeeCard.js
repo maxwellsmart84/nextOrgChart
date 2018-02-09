@@ -9,9 +9,9 @@ export default class EmployeeCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: props.name || '',
+      name: '',
       rank: props.rank,
-      title: props.title || '',
+      title: '',
       saveCall: false,
       nameInvalid: false,
     }
@@ -73,7 +73,7 @@ export default class EmployeeCard extends React.Component {
           {nameError}
         </div>
         <label>
-          <h3>Title: {this.state.title}</h3>
+          <h3>Title: {this.props.title}</h3>
           <input name="title" placeholder="Title" type="text" value={this.state.title} onChange={event => this.handleChange(event)} />
         </label>
         <label>

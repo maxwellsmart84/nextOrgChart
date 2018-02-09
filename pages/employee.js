@@ -62,15 +62,15 @@ render() {
       <div>
         <Header url={this.props.url} title={this.props.employee.name} />
         <div id="employeeContainer">
-          <div class="left">
+          <div className="left">
             <div id="form">
               <EmployeeCard url={this.props.url} name={this.props.employee.name} title={this.props.employee.title} rank={this.props.employee.rank} supervisor={this.props.supervisor || undefined} />
             </div>
           </div>
           {this.props.treeData &&
-          <div class="right">
+          <div className="right">
             <div id="tree">
-              <Tree data={this.props.treeData} />
+              <Tree url={this.props.url} data={this.props.treeData} />
             </div>
           </div>
           }

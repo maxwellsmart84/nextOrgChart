@@ -60,7 +60,7 @@ export default class EmployeeForm extends React.Component {
     let savedText = null;
     let nameError = null;
 
-    if (this.state.nameInvalids) {
+    if (this.state.nameInvalid) {
       nameError = <span className="error">Name Required</span>
     }
     if (dataSaved) {
@@ -115,7 +115,6 @@ export default class EmployeeForm extends React.Component {
           display: block;
           width:40%;
           padding-bottom: 40px;
-          padding-top: 20px;
         }
         #checkboxBloc h3 {
           display: inline

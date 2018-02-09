@@ -1,9 +1,13 @@
+import Link from 'next/link';
+
 
 const EmployeeNodeStatic = ({ node }) => {
   return (
     <div>
-      <p id="plus">&#43;</p>
-      <p id="name">{node.name}</p>
+      <Link href={`/create?id=${node.id}`}>
+        <a id="plus">&#43;</a>
+      </Link>
+      <span id="name">{node.name}</span>
       <span id={node.rank} className="rank">{node.rank}</span>
       <div>
         <span id="title">{node.title}</span>
@@ -20,17 +24,20 @@ const EmployeeNodeStatic = ({ node }) => {
       line-height: 1.6em;
       text-align: center;
       width: 1.3em;
+      font-weight: bold;
     }
-    p {
+    a {
+      text-decoration: none;
       color: black;
       font-weight: bold;
+    }
+    span {
+      color: black;
     }
     #name {
       padding-left: 5px;
       padding-right: 5px;
-    }
-    #name:hover {
-      color: #79589F;
+      font-weight: bold;
     }
     #plus {
       color: #cccccc;
@@ -48,4 +55,4 @@ const EmployeeNodeStatic = ({ node }) => {
   );
 }
 
-export default EmployeeNode;
+export default EmployeeNodeStatic;
