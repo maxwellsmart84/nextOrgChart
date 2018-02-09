@@ -12,8 +12,8 @@ export default class extends React.Component {
     if (req) {
       const { db } = req;
       const employeeId = query.id;
-      const employee = await db.model('Employee').findById(employeeId);
-      const supervisor = shapeEmployeeOut(data);
+      const employeeData = await db.model('Employee').findById(employeeId);
+      const employee = shapeEmployeeOut(employeeData);
       return { employee };
     }
     const employeeId = query.id;
@@ -24,8 +24,8 @@ export default class extends React.Component {
   render() {
     return (
       <div>
-        <Header url={this.props.url} title={this.props.employee.name} />
-        <EmployeeForm employee={this.props.employee} />
+        <Header url={this.props.url} title={this.props.employee} />
+        <EmployeeForm rank={this.props.employee.rank} name={this.props.employee.name} id={this.props.employee.id} supervisorId={this.props.employee.supervisorId} />
         <style jsx global> {`
           body {
             background: #FFF;

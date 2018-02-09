@@ -1,6 +1,9 @@
 
 //recurive function for assembling the d3 style tree
 exports.buildTree = function (arr) {
+  if (!arr || arr.length === 0) {
+    return arr;
+  }
   var tree = [],
     mappedArr = {},
     arrElem,
@@ -17,7 +20,7 @@ exports.buildTree = function (arr) {
     if (mappedArr.hasOwnProperty(id)) {
       mappedElem = mappedArr[id];
       // If the element is not at the root level, add it to its parent array of children.
-      if (mappedElem.supervisorId !== 'None') {
+      if (mappedElem.supervisorId !== 'None' && mappedArr[mappedElem.supervisorId] !== undefined) {
         mappedArr[mappedElem.supervisorId].children.push(mappedElem);
       }
       // If the element is at the root level, add it to first level elements array.

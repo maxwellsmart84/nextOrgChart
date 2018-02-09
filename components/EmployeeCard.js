@@ -9,14 +9,35 @@ export default class EmployeeCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: props.name || '',
+      name: props.name,
       rank: props.rank,
-      title: props.title || '',
+      title: props.title,
       saveCall: false,
+      nameInvalid: false,
+      rankInvalid: false,
+      titleInvalid: false,
+      isText: true,
+      isNotOwner: this.props.supervisor && this.props.supervisor.id !== 'None',
     }
+
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.supervisor && nextProps.supervisor !== 'None') {
+       this.setState({ isNotOwner: true });
+    }
+    if (nextProps.name !== this.state.name) {
+      this.setState({ name: nextProps.name })
+    }
+    if (nextProps.title !== this.state.title) {
+      this.setState({ title: nextProps.title })
+    }
+    if (nextProps.rank !== this.state.rank) {
+      this.setState({ rank: nextProps.rank })
+    }
   }
 
   handleChange = (event) => {
@@ -28,14 +49,21 @@ export default class EmployeeCard extends React.Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    const { name, rank, title } = this.state;
-    const payload = {
-      name,
-      rank,
-      title,
+    if (this.state.name === undefined || this.state.name === '') {
+      this.setState({ nameInvalid: true })
     }
-    await axios.patch(`${apiUrl}/employee/${this.props.url.query.id}`, payload);
-    this.setState({ saveCall: true });
+    else if (this.state.rank < this.props.supervisor.rank) {
+      this.setState ({ rankInvalid: true })
+    } else {
+      const { name, rank, title } = this.state;
+      const payload = {
+        name,
+        rank,
+        title,
+      }
+      await axios.patch(`${apiUrl}/employee/${this.props.url.query.id}`, payload);
+      this.setState({ saveCall: true });
+    }
   }
 
   handleDelete = async (event) => {
@@ -47,34 +75,59 @@ export default class EmployeeCard extends React.Component {
   render() {
     const dataSaved = this.state.saveCall;
     let savedText = null;
+    let nameError = null;
+    let rankError = null;
+    const highestWorkerRank = this.props.workers.length !== 0 ? this.props.workers[0].rank : 99;
+
+    if (this.state.nameInvalid) {
+      nameError = <span className="error">Name Required</span>
+    }
+    if (this.state.rankInvalid) {
+      rankError = <span className="error">Rank out of bounds</span>
+    }
     if (dataSaved) {
       savedText = <span id="savedText">Employee Information Updated</span>
     }
     return (
     <div id="formContainer">
       <h1>Edit Employee</h1>
-      <h3>Supervisor: {this.props.supervisor ? this.props.supervisor.name : 'None'}</h3>
+        <h3>Supervisor: {this.props.supervisor ? this.props.supervisor.name : 'None'}</h3>
       <form onSubmit={this.handleSubmit}>
         <label>
-          <h3>Name: {this.state.name}</h3>
-          <input name="name" placeholder="Name" type="text" value={this.state.name} onChange={event => this.handleChange(event)} />
+        <h3>Name: {this.props.name}</h3>
         </label>
+        <input name="name" placeholder="Name" type="text" value={this.state.name} onChange={event => this.handleChange(event)} />
+        <div>
+          {nameError}
+        </div>
         <label>
-          <h3>Title: {this.state.title}</h3>
-          <input name="title" placeholder="Title" type="text" value={this.state.title} onChange={event => this.handleChange(event)} />
+          <h3>Title: {this.props.title}</h3>
         </label>
+        <input name="title" placeholder="Title" type="text" value={this.state.title} onChange={event => this.handleChange(event)} />
         <label>
           <h3>Rank: {this.state.rank}</h3>
-          <input name="rank" type="number" min={this.props.supervisor ? this.props.supervisor.rank : 0} max="99" placeholder="Rank" value={this.state.rank} onChange={event=> this.handleChange(event)} />
         </label>
+        {this.state.isNotOwner &&
+        <input name="rank" type="number" min={this.props.supervisor ? this.props.supervisor.rank : 0} max={highestWorkerRank} placeholder="Rank" value={this.state.rank} onChange={event=> this.handleChange(event)} />
+        }
+        <div>
+          {rankError}
+        </div>
       </form>
         <div id="buttonBlock">
           <button id="save" onClick={(e) => this.handleSubmit(e)}>SAVE</button>
+          {this.state.isNotOwner &&
           <button id="delete" onClick={(e) => this.handleDelete(e)}>DELETE</button>
+          }
         </div>
         {savedText}
         <br />
       <style global jsx>{`
+      .error {
+        color:red;
+        font-size:.8em;
+        padding-left 2px;
+      }
       #savedText {
         color:limegreen;
         margin-left: 12px;
@@ -87,14 +140,11 @@ export default class EmployeeCard extends React.Component {
         text-decoration: none;
         color: black
       }
-      #formContainer {
-        width: 100%;
-        padding-bottom: 5%;
-        margin-left: 20%;
-        margin-right: 20%;
+      a:hover {
+        color:#79589F;
       }
       input {
-        width: 30%;
+        width: 100%;
         padding: 12px 20px;
         margin: 8px 0;
         box-sizing: border-box;

@@ -39,6 +39,13 @@ exports.deleteEmployee = async function (req, res, next) {
   await employeeService.deleteEmployee(id);
 }
 
+exports.getWorkers = async function (req, res, next) {
+  const id = req.params.id;
+
+  const workers =  await employeeService.getSupervisorWorkers(id);
+  return shaper.shapeEmployeesOut(workers);
+}
+
 // exports.changeSupervisor = async function(req, res, next) {
 //   const db = req.db;
 //   const data = req.body;

@@ -1,15 +1,15 @@
 
 exports.shapeEmployeeOut = function(data) {
   if (!data) {
-    return null;
+    return data;
   }
-    return {
-      id: data._id.toString(),
-      name: data.name,
-      rank: data.rank,
-      title: data.title,
-      supervisorId: data.supervisorId ? data.supervisorId : 'None',
-  }
+  return {
+    id: data._id.toString(),
+    name: data.name,
+    rank: data.rank,
+    title: data.title,
+    supervisorId: data.supervisorId ? data.supervisorId : 'None',
+  };
 }
 
 // data sanitization

@@ -30,6 +30,7 @@ const EmployeeNode = ({node}) => {
     a {
       text-decoration: none;
       color: black;
+      font-weight: bold;
     }
     #name {
       padding-left: 5px;
@@ -37,7 +38,6 @@ const EmployeeNode = ({node}) => {
     }
     #name:hover {
       color: #79589F;
-      font-weight: bold;
     }
     #plus {
       color: #cccccc;

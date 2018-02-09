@@ -1,10 +1,8 @@
 import Link from 'next/link';
-// import EmployeeNode from '../components/EmployeeNode';
 import Header from '../components/Header';
-// import Tree from 'react-tree-graph';
 import axios from 'axios';
 import Tree from '../components/Tree';
-import OrgChart from 'react-orgchart';
+import EmployeeForm from '../components/EmployeeForm';
 import { shapeEmployeesOut } from '../api/shapers/employeeShaper';
 import { buildTree } from '../api/utility';
 import Router from 'next/router';
@@ -32,10 +30,16 @@ export default class extends React.Component {
         <div>
           <Header url={this.props.url} title={this.props} />
         </div>
+        {this.props.treeData &&
         <div id="tree">
-          <Tree data={this.props.treeData} />
-          {/* <Tree data={this.props.treeData} height={800} width={800} keyProp={} gProps={{ onClick: handleClick() }} svgProps={{transform: 'rotate(90)'}}/> */}
+          <Tree url={this.props.url} data={this.props.treeData} />
         </div>
+        }
+        {!this.props.treeData &&
+        <div>
+          <EmployeeForm employee={''} />
+        </div>
+        }
       <style jsx global>{`
         #tree {
           padding-top: 20px
