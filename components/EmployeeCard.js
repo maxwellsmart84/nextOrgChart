@@ -26,7 +26,7 @@ export default class EmployeeCard extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.supervisor !== undefined || 'None') {
+    if (nextProps.supervisor && nextProps.supervisor !== 'None') {
        this.setState({ isNotOwner: true });
     }
     if (nextProps.name !== this.state.name) {
@@ -49,10 +49,9 @@ export default class EmployeeCard extends React.Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    const nameRegEx = RegExp('[\w\s.]')
-    const titleRegEx = RegExp('[\w\s.][0-9]');
+    const titleRegEx = RegExp('[\w\s.\\-][0-9]');
 
-    if (this.state.name === undefined || this.state.name === '' || !stringRegEx.test(this.state.name)) {
+    if (this.state.name === undefined || this.state.name === '') {
       this.setState({ nameInvalid: true })
     }
     else if (!titleRegEx.test(this.state.title)) {
