@@ -63,7 +63,7 @@ export default class EmployeeCard extends React.Component {
     return (
     <div id="formContainer">
       <h1>Edit Employee</h1>
-      <h3>Supervisor: {this.props.supervisor ? this.props.supervisor.name : 'None'}</h3>
+        <h3>Supervisor: <Link href={`/employee?id=${this.props.supervisorId ? this.props.supervisorId : this.props.url.query.id}`}><a>{this.props.supervisor ? this.props.supervisor.name : 'None'}</a></Link></h3>
       <form onSubmit={this.handleSubmit}>
         <label>
           <h3>Name: {this.props.name}</h3>
@@ -104,6 +104,9 @@ export default class EmployeeCard extends React.Component {
       a {
         text-decoration: none;
         color: black
+      }
+      a:hover {
+        color:#79589F;
       }
       input {
         width: 30%;

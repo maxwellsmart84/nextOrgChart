@@ -31,7 +31,6 @@ export default class extends React.Component {
         const superData = await db.model('Employee').findById(employee.supervisorId);
         supervisor = shapeEmployeeOut(superData);
       }
-      console.log(employee, treeData, supervisor)
       return { employee, treeData, supervisor };
     }
     let supervisor = null;
