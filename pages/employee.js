@@ -24,7 +24,6 @@ export default class extends React.Component {
       if (workerData.length !== 0) {
         const rawData = [employee, ...workers]
         treeData = buildTree(rawData)[0]
-        console.log(treeData)
       }
 
       if (employee && employee.supervisorId !== 'None') {
@@ -58,7 +57,6 @@ export default class extends React.Component {
 
 
 render() {
-  console.log(this.props.treeData);
   return (
       <div>
         <Header url={this.props.url} title={this.props.employee.name} />

@@ -12,16 +12,14 @@ export default class extends React.Component {
     if (req) {
       const { db } = req;
       const employeeId = query.id;
-      console.log('QUERY ID SSR', employeeId)
       const employeeData = await db.model('Employee').findById(employeeId);
-      const employee = shapeEmployeeOut(data);
-      console.log(employee, 'EMPLOYEE')
+      const employee = shapeEmployeeOut(employeeData);
       return { employee };
     }
     const employeeId = query.id;
     console.log(query.id);
     const { data } = await axios.get(`${apiUrl}/employee/${employeeId}`);
-    console.log('DATA', data);
+    console.log('CLIENT DATA', data);
     const employee = data;
     return { employee };
   }
@@ -29,7 +27,7 @@ export default class extends React.Component {
     return (
       <div>
         <Header url={this.props.url} title={this.props.employee} />
-        <EmployeeForm employee={this.props.employee} />
+        <EmployeeForm rank={this.props.employee.rank} name={this.props.employee.name} id={this.props.employee.id} supervisorId={this.props.employee.supervisorId} />
         <style jsx global> {`
           body {
             background: #FFF;

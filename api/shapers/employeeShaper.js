@@ -1,8 +1,5 @@
 
 exports.shapeEmployeeOut = function(data) {
-  if (!data) {
-    return null;
-  }
     return {
       id: data._id.toString(),
       name: data.name,

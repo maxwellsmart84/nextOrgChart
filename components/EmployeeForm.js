@@ -8,17 +8,17 @@ const apiUrl = '/api'
 export default class EmployeeForm extends React.Component {
   constructor(props) {
     super(props);
+    console.log('INITIAL PROPS', props);
     this.state = {
-      name: undefined,
-      rank: props.employee.rank + 1 || 0,
+      name: '',
+      rank: props.rank + 1,
       title: '',
-      employee: props.employee,
       makeSupervisor: false,
       saveCall: false,
       nameInvalid: false,
-      isNotOwner: this.props.employee.supervisorId !== 'None',
+      isNotOwner: props.supervisorId !== 'None',
     }
-    console.log('PROPS', props)
+    console.log('PROPS', props, 'STATE')
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleClick = this.handleClick.bind(this)
@@ -55,15 +55,15 @@ export default class EmployeeForm extends React.Component {
       const { name, rank, title, makeSupervisor } = this.state;
       const payload = {
         name,
-        rank: makeSupervisor ? this.props.employee.rank - 1 : rank,
+        rank: makeSupervisor ? this.props.rank : rank,
         title,
         //either make them the supervisor of the employee they clicked the box next to or inherit the existing and make them a worker
-        supervisorId: makeSupervisor ? this.props.employee.supervisorId : this.props.employee.id,
+        supervisorId: makeSupervisor ? this.props.supervisorId : this.props.id,
       }
       const { data } = await axios.post(`${apiUrl}/employee`, payload);
       if (makeSupervisor) {
-        console.log(this.props.employee.id)
-        await axios.patch(`${apiUrl}/employee/${this.props.employee.id}`, { supervisorId: data.id });
+        console.log(this.props.id)
+        await axios.patch(`${apiUrl}/employee/${this.props.id}`, { supervisorId: data.id });
       }
       this.setState({ saveCall: true });
     }
@@ -81,9 +81,9 @@ export default class EmployeeForm extends React.Component {
     if (dataSaved) {
       savedText = <p id="saved">Employee Information Updated</p>
     }
-    let supervisorHeader = <h3>Employee will be added under: {this.state.employee.name}</h3>
+    let supervisorHeader = <h3>Employee will be added under: {this.props.name}</h3>
     if (isMakeSupervisor) {
-      supervisorHeader = <h3>Employee will be made supervisor of: {this.state.employee.name}</h3>;
+      supervisorHeader = <h3>Employee will be made supervisor of: {this.props.name}</h3>;
     }
     return (
       <div id="formContainer">
@@ -101,12 +101,12 @@ export default class EmployeeForm extends React.Component {
             <h3>Title: {this.state.title}</h3>
             <input name="title" placeholder="Title" type="text" value={this.state.title} onChange={event => this.handleChange(event)} />
           </label>
+          {!this.state.makeSupervisor &&
           <label>
-            <h3>Rank: {!this.state.makeSupervisor ? this.props.employee.rank - 2 : this.props.employee.rank}</h3>
-            {!this.state.makeSupervisor &&
-            <input name="rank" type="number" min={this.props.employee.rank} max="99" placeholder="Rank" value={this.state.rank} onChange={event => this.handleChange(event)} />
-            }
+            <h3>Rank: {this.state.rank}</h3>
+            <input name="rank" type="number" min={this.props.rank} max="99" placeholder="Rank" value={this.state.rank} onChange={event => this.handleChange(event)} />
           </label>
+          }
           {this.state.isNotOwner &&
             <div id="checkboxBlock">
               <h3>Make New Supervisor</h3>
