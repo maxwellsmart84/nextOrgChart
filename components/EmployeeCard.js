@@ -14,6 +14,8 @@ export default class EmployeeCard extends React.Component {
       title: props.title,
       saveCall: false,
       nameInvalid: false,
+      rankInvalid: false,
+      isText: true,
       isNotOwner: this.props.supervisor && this.props.supervisor.id !== 'None',
     }
 
@@ -48,6 +50,9 @@ export default class EmployeeCard extends React.Component {
     event.preventDefault();
     if (this.state.name === undefined || this.state.name === '') {
       this.setState({ nameInvalid: true })
+    }
+    else if (this.state.rank < this.props.rank) {
+      this.setState ({ rankInvalid: true })
     } else {
       const { name, rank, title } = this.state;
       const payload = {
@@ -70,10 +75,14 @@ export default class EmployeeCard extends React.Component {
     const dataSaved = this.state.saveCall;
     let savedText = null;
     let nameError = null;
+    let rankError = null;
     const highestWorkerRank = this.props.workers.length !== 0 ? this.props.workers[0].rank : 99;
 
     if (this.state.nameInvalid) {
       nameError = <span className="error">Name Required</span>
+    }
+    if (this.state.rankInvalid) {
+      rankError = <span className="error">Rank out of bounds</span>
     }
     if (dataSaved) {
       savedText = <span id="savedText">Employee Information Updated</span>
@@ -98,6 +107,9 @@ export default class EmployeeCard extends React.Component {
           <h3>Rank: {this.state.rank}</h3>
         </label>
         <input name="rank" type="number" min={this.props.supervisor ? this.props.supervisor.rank : 0} max={highestWorkerRank} placeholder="Rank" value={this.state.rank} onChange={event=> this.handleChange(event)} />
+        <div>
+        {rankError}
+        </div>
       </form>
         <div id="buttonBlock">
           <button id="save" onClick={(e) => this.handleSubmit(e)}>SAVE</button>

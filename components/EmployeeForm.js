@@ -15,6 +15,7 @@ export default class EmployeeForm extends React.Component {
       makeSupervisor: false,
       saveCall: false,
       nameInvalid: false,
+      rankInvalid: false,
       isNotOwner: props.supervisorId !== 'None',
     }
     this.handleChange = this.handleChange.bind(this)
@@ -48,7 +49,10 @@ export default class EmployeeForm extends React.Component {
   handleSubmit = async (event) => {
     event.preventDefault();
     if (this.state.name === undefined || this.state.name === '') {
-      this.setState({ nameInvalid: true })
+        this.setState({ nameInvalid: true })
+      }
+      else if (this.state.rank < this.props.rank) {
+        this.setState ({ rankInvalid: true })
       } else {
       const { name, rank, title, makeSupervisor } = this.state;
       const payload = {
@@ -71,9 +75,13 @@ export default class EmployeeForm extends React.Component {
     const dataSaved = this.state.saveCall;
     let savedText = null;
     let nameError = null;
+    let rankError = null;
 
     if (this.state.nameInvalid) {
       nameError = <span className="error">Name Required</span>
+    }
+    if (this.state.rankInvalid) {
+      rankError = <span className="error">Rank out of bounds</span>
     }
     if (dataSaved) {
       savedText = <p id="saved">Employee Information Updated</p>
@@ -104,6 +112,9 @@ export default class EmployeeForm extends React.Component {
             <input name="rank" type="number" min={this.props.rank} max="99" placeholder="Rank" value={this.state.rank} onChange={event => this.handleChange(event)} />
           </label>
           }
+          <div>
+            {rankError}
+          </div>
           {this.state.isNotOwner &&
             <div id="checkboxBlock">
               <h3>Make New Supervisor</h3>
