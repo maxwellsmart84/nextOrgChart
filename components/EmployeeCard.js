@@ -49,13 +49,9 @@ export default class EmployeeCard extends React.Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    const titleRegEx = RegExp('[\w\s.\\-][0-9]');
 
     if (this.state.name === undefined || this.state.name === '') {
       this.setState({ nameInvalid: true })
-    }
-    else if (!titleRegEx.test(this.state.title)) {
-      this.setState ({ titleInvalid: true })
     }
     else if (this.state.rank < this.props.rank) {
       this.setState ({ rankInvalid: true })
@@ -82,7 +78,6 @@ export default class EmployeeCard extends React.Component {
     let savedText = null;
     let nameError = null;
     let rankError = null;
-    let titleError = null;
     const highestWorkerRank = this.props.workers.length !== 0 ? this.props.workers[0].rank : 99;
 
     if (this.state.nameInvalid) {
@@ -110,9 +105,6 @@ export default class EmployeeCard extends React.Component {
           <h3>Title: {this.props.title}</h3>
         </label>
         <input name="title" placeholder="Title" type="text" value={this.state.title} onChange={event => this.handleChange(event)} />
-        <div>
-          {titleError}
-        </div>
         <label>
           <h3>Rank: {this.state.rank}</h3>
         </label>

@@ -49,31 +49,27 @@ export default class EmployeeForm extends React.Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    const titleRegEx = RegExp('^[a-zA-Z0-9!@#$&()\\-`.+,/\"]*$');
 
     console.log(this.state.name)
     if (this.state.name === undefined || this.state.name === '') {
         this.setState({ nameInvalid: true })
       }
-      else if (!titleRegEx.test(this.state.title)) {
-        this.setState ({ titleInvalid: true })
-      }
       else if (this.state.rank < this.props.rank) {
         this.setState ({ rankInvalid: true })
       } else {
-      const { name, rank, title, makeSupervisor } = this.state;
-      const payload = {
-        name,
-        rank: makeSupervisor ? this.props.rank : rank,
-        title,
-        //either make them the supervisor of the employee they clicked the box next to or inherit the existing and make them a worker
-        supervisorId: makeSupervisor ? this.props.supervisorId : this.props.id,
-      }
-      const { data } = await axios.post(`${apiUrl}/employee`, payload);
-      if (makeSupervisor) {
-        await axios.patch(`${apiUrl}/employee/${this.props.id}`, { supervisorId: data.id });
-      }
-      this.setState({ saveCall: true });
+        const { name, rank, title, makeSupervisor } = this.state;
+        const payload = {
+          name,
+          rank: makeSupervisor ? this.props.rank : rank,
+          title,
+          //either make them the supervisor of the employee they clicked the box next to or inherit the existing and make them a worker
+          supervisorId: makeSupervisor ? this.props.supervisorId : this.props.id,
+        }
+        const { data } = await axios.post(`${apiUrl}/employee`, payload);
+        if (makeSupervisor) {
+          await axios.patch(`${apiUrl}/employee/${this.props.id}`, { supervisorId: data.id });
+        }
+        this.setState({ saveCall: true });
     }
   }
 
@@ -83,13 +79,9 @@ export default class EmployeeForm extends React.Component {
     let savedText = null;
     let nameError = null;
     let rankError = null;
-    let titleError = null;
 
     if (this.state.nameInvalid) {
       nameError = <span className="error">Name Required</span>
-    }
-    if (this.state.titleInvalid) {
-      titleError = <span className="error">Title cannot include special characters</span>
     }
     if (this.state.rankInvalid) {
       rankError = <span className="error">Rank out of bounds</span>
@@ -117,9 +109,6 @@ export default class EmployeeForm extends React.Component {
             <h3>Title: {this.state.title}</h3>
             <input name="title" placeholder="Title" type="text" value={this.state.title} onChange={event => this.handleChange(event)} />
           </label>
-          <div>
-            {titleError}
-          </div>
           {!this.state.makeSupervisor &&
           <label>
             <h3>Rank: {this.state.rank}</h3>
