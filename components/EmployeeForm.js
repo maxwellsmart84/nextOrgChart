@@ -9,12 +9,13 @@ export default class EmployeeForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      name: undefined,
       rank: this.props.employee.rank + 1,
       title: '',
       employee: this.props.employee,
       makeSupervisor: false,
       saveCall: false,
+      nameInvalid: false,
       isNotOwner: this.props.employee.supervisorId !== 'None',
     }
 
@@ -36,25 +37,34 @@ export default class EmployeeForm extends React.Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    const { name, rank, title, makeSupervisor } = this.state;
-    const payload = {
-      name,
-      rank: makeSupervisor ? this.props.employee.rank -1 : rank,
-      title,
-      //either make them the supervisor of the employee they clicked the box next to or inherit the existing and make them a worker
-      supervisorId: makeSupervisor ? this.props.employee.supervisorId : this.props.employee.id,
+    if (this.state.name === undefined || this.state.name === '') {
+      this.setState({ nameInvalid: true })
+      } else {
+      const { name, rank, title, makeSupervisor } = this.state;
+      const payload = {
+        name,
+        rank: makeSupervisor ? this.props.employee.rank - 1 : rank,
+        title,
+        //either make them the supervisor of the employee they clicked the box next to or inherit the existing and make them a worker
+        supervisorId: makeSupervisor ? this.props.employee.supervisorId : this.props.employee.id,
+      }
+
+      const { data } = await axios.post(`${apiUrl}/employee`, payload);
+      this.setState({ saveCall: true });
     }
-    const { data } = await axios.post(`${apiUrl}/employee`, payload);
-    this.setState({ saveCall: true });
   }
 
   render() {
     const isMakeSupervisor = this.state.makeSupervisor;
     const dataSaved = this.state.saveCall;
     let savedText = null;
+    let nameError = null;
 
+    if (this.state.nameInvalids) {
+      nameError = <span className="error">Name Required</span>
+    }
     if (dataSaved) {
-      savedText = <span id="saved">Employee Information Updated</span>
+      savedText = <p id="saved">Employee Information Updated</p>
     }
     let supervisorHeader = <h3>Employee will be added under: {this.state.employee.name}</h3>
     if (isMakeSupervisor) {
@@ -67,8 +77,11 @@ export default class EmployeeForm extends React.Component {
           {supervisorHeader}
           <label>
             <h3>Name: {this.state.name}</h3>
-            <input name="name" placeholder="Name" type="text" value={this.state.name} onChange={event => this.handleChange(event)} />
+            <input name="name" placeholder="Name" type="text" defaultValue={this.state.name} onChange={event => this.handleChange(event)} />
           </label>
+          <div>
+            {nameError}
+          </div>
           <label>
             <h3>Title: {this.state.title}</h3>
             <input name="title" placeholder="Title" type="text" value={this.state.title} onChange={event => this.handleChange(event)} />
@@ -89,6 +102,11 @@ export default class EmployeeForm extends React.Component {
           </div>
         </form>
         <style global jsx>{`
+        .error {
+          color:red;
+          font-size:.8em;
+          padding-left 2px;
+        }
         #saved {
           color:limegreen
           padding-left: 20px;

@@ -13,6 +13,7 @@ export default class EmployeeCard extends React.Component {
       rank: props.rank,
       title: props.title || '',
       saveCall: false,
+      nameInvalid: false,
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -28,14 +29,18 @@ export default class EmployeeCard extends React.Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    const { name, rank, title } = this.state;
-    const payload = {
-      name,
-      rank,
-      title,
+    if (this.state.name === undefined || this.state.name === '') {
+      this.setState({ nameInvalid: true })
+    } else {
+      const { name, rank, title } = this.state;
+      const payload = {
+        name,
+        rank,
+        title,
+      }
+      await axios.patch(`${apiUrl}/employee/${this.props.url.query.id}`, payload);
+      this.setState({ saveCall: true });
     }
-    await axios.patch(`${apiUrl}/employee/${this.props.url.query.id}`, payload);
-    this.setState({ saveCall: true });
   }
 
   handleDelete = async (event) => {
@@ -47,6 +52,11 @@ export default class EmployeeCard extends React.Component {
   render() {
     const dataSaved = this.state.saveCall;
     let savedText = null;
+    let nameError = null;
+
+    if (this.state.nameInvalid) {
+      nameError = <span className="error">Name Required</span>
+    }
     if (dataSaved) {
       savedText = <span id="savedText">Employee Information Updated</span>
     }
@@ -56,9 +66,12 @@ export default class EmployeeCard extends React.Component {
       <h3>Supervisor: {this.props.supervisor ? this.props.supervisor.name : 'None'}</h3>
       <form onSubmit={this.handleSubmit}>
         <label>
-          <h3>Name: {this.state.name}</h3>
+          <h3>Name: {this.props.name}</h3>
           <input name="name" placeholder="Name" type="text" value={this.state.name} onChange={event => this.handleChange(event)} />
         </label>
+        <div>
+          {nameError}
+        </div>
         <label>
           <h3>Title: {this.state.title}</h3>
           <input name="title" placeholder="Title" type="text" value={this.state.title} onChange={event => this.handleChange(event)} />
@@ -75,6 +88,11 @@ export default class EmployeeCard extends React.Component {
         {savedText}
         <br />
       <style global jsx>{`
+      .error {
+        color:red;
+        font-size:.8em;
+        padding-left 2px;
+      }
       #savedText {
         color:limegreen;
         margin-left: 12px;
@@ -86,12 +104,6 @@ export default class EmployeeCard extends React.Component {
       a {
         text-decoration: none;
         color: black
-      }
-      #formContainer {
-        width: 100%;
-        padding-bottom: 5%;
-        margin-left: 20%;
-        margin-right: 20%;
       }
       input {
         width: 30%;

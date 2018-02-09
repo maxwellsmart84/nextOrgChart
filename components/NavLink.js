@@ -13,7 +13,7 @@ const NavLink = (props) => (
       a {
         color: white;
         text-decoration: none;
-        font-size: 1.5em;
+        font-size: 1.3em;
       }
       ul {
         width: 40%;
