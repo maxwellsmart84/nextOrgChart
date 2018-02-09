@@ -32,6 +32,9 @@ export default class EmployeeCard extends React.Component {
     if (nextProps.title !== this.state.title) {
       this.setState({ title: nextProps.title })
     }
+    if (nextProps.rank !== this.state.rank) {
+      this.setState({ rank: nextProps.rank })
+    }
   }
 
   handleChange = (event) => {
@@ -67,7 +70,7 @@ export default class EmployeeCard extends React.Component {
     const dataSaved = this.state.saveCall;
     let savedText = null;
     let nameError = null;
-    const highestWorkerRank = this.props.workers[0].rank;
+    const highestWorkerRank = this.props.workers.length !== 0 ? this.props.workers[0].rank : 99;
 
     if (this.state.nameInvalid) {
       nameError = <span className="error">Name Required</span>
