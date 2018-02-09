@@ -50,7 +50,6 @@ export default class EmployeeForm extends React.Component {
   handleSubmit = async (event) => {
     event.preventDefault();
 
-    console.log(this.state.name)
     if (this.state.name === undefined || this.state.name === '') {
         this.setState({ nameInvalid: true })
       }
