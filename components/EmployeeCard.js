@@ -108,7 +108,9 @@ export default class EmployeeCard extends React.Component {
         <label>
           <h3>Rank: {this.state.rank}</h3>
         </label>
+        {this.state.isNotOwner &&
         <input name="rank" type="number" min={this.props.supervisor ? this.props.supervisor.rank : 0} max={highestWorkerRank} placeholder="Rank" value={this.state.rank} onChange={event=> this.handleChange(event)} />
+        }
         <div>
           {rankError}
         </div>
