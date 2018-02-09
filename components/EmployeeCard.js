@@ -67,6 +67,7 @@ export default class EmployeeCard extends React.Component {
     const dataSaved = this.state.saveCall;
     let savedText = null;
     let nameError = null;
+    const highestWorkerRank = this.props.workers[0].rank;
 
     if (this.state.nameInvalid) {
       nameError = <span className="error">Name Required</span>
@@ -93,7 +94,7 @@ export default class EmployeeCard extends React.Component {
         <label>
           <h3>Rank: {this.state.rank}</h3>
         </label>
-        <input name="rank" type="number" min={this.props.supervisor ? this.props.supervisor.rank : 0} max="99" placeholder="Rank" value={this.state.rank} onChange={event=> this.handleChange(event)} />
+        <input name="rank" type="number" min={this.props.supervisor ? this.props.supervisor.rank : 0} max={highestWorkerRank} placeholder="Rank" value={this.state.rank} onChange={event=> this.handleChange(event)} />
       </form>
         <div id="buttonBlock">
           <button id="save" onClick={(e) => this.handleSubmit(e)}>SAVE</button>

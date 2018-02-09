@@ -17,9 +17,7 @@ export default class extends React.Component {
       return { employee };
     }
     const employeeId = query.id;
-    console.log(query.id);
     const { data } = await axios.get(`${apiUrl}/employee/${employeeId}`);
-    console.log('CLIENT DATA', data);
     const employee = data;
     return { employee };
   }

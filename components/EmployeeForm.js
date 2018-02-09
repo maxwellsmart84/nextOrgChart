@@ -8,7 +8,6 @@ const apiUrl = '/api'
 export default class EmployeeForm extends React.Component {
   constructor(props) {
     super(props);
-    console.log('INITIAL PROPS', props);
     this.state = {
       name: '',
       rank: props.rank + 1,
@@ -18,7 +17,6 @@ export default class EmployeeForm extends React.Component {
       nameInvalid: false,
       isNotOwner: props.supervisorId !== 'None',
     }
-    console.log('PROPS', props, 'STATE')
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleClick = this.handleClick.bind(this)
@@ -62,7 +60,6 @@ export default class EmployeeForm extends React.Component {
       }
       const { data } = await axios.post(`${apiUrl}/employee`, payload);
       if (makeSupervisor) {
-        console.log(this.props.id)
         await axios.patch(`${apiUrl}/employee/${this.props.id}`, { supervisorId: data.id });
       }
       this.setState({ saveCall: true });

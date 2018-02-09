@@ -31,7 +31,7 @@ export default class extends React.Component {
         const superData = await db.model('Employee').findById(employee.supervisorId);
         supervisor = shapeEmployeeOut(superData);
       }
-      return { employee, treeData, supervisor };
+      return { employee, treeData, workers, supervisor };
     }
     let supervisor = null;
     let treeData = null;
@@ -52,7 +52,7 @@ export default class extends React.Component {
       const superData = await axios.get(`${apiUrl}/employee/${employee.supervisorId}`);
       supervisor = superData.data;
     }
-    return { employee, treeData, supervisor };
+    return { employee, treeData, workers, supervisor };
   }
 
 
@@ -63,7 +63,7 @@ render() {
         <div id="employeeContainer">
           <div className="left">
             <div id="form">
-              <EmployeeCard url={this.props.url} name={this.props.employee.name} title={this.props.employee.title} rank={this.props.employee.rank} supervisor={this.props.supervisor || undefined} />
+              <EmployeeCard url={this.props.url} name={this.props.employee.name} title={this.props.employee.title} rank={this.props.employee.rank}  workers={this.props.workers} supervisor={this.props.supervisor || undefined} />
             </div>
           </div>
           {this.props.treeData &&
