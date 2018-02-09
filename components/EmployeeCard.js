@@ -80,20 +80,20 @@ export default class EmployeeCard extends React.Component {
         <h3>Supervisor: {this.props.supervisor ? this.props.supervisor.name : 'None'}</h3>
       <form onSubmit={this.handleSubmit}>
         <label>
-          <h3>Name: {this.props.name}</h3>
-          <input name="name" placeholder="Name" type="text" value={this.state.name} onChange={event => this.handleChange(event)} />
+        <h3>Name: {this.props.name}</h3>
         </label>
+        <input name="name" placeholder="Name" type="text" value={this.state.name} onChange={event => this.handleChange(event)} />
         <div>
           {nameError}
         </div>
         <label>
           <h3>Title: {this.props.title}</h3>
-          <input name="title" placeholder="Title" type="text" value={this.state.title} onChange={event => this.handleChange(event)} />
         </label>
+        <input name="title" placeholder="Title" type="text" value={this.state.title} onChange={event => this.handleChange(event)} />
         <label>
           <h3>Rank: {this.state.rank}</h3>
-          <input name="rank" type="number" min={this.props.supervisor ? this.props.supervisor.rank : 0} max="99" placeholder="Rank" value={this.state.rank} onChange={event=> this.handleChange(event)} />
         </label>
+        <input name="rank" type="number" min={this.props.supervisor ? this.props.supervisor.rank : 0} max="99" placeholder="Rank" value={this.state.rank} onChange={event=> this.handleChange(event)} />
       </form>
         <div id="buttonBlock">
           <button id="save" onClick={(e) => this.handleSubmit(e)}>SAVE</button>
@@ -125,7 +125,7 @@ export default class EmployeeCard extends React.Component {
         color:#79589F;
       }
       input {
-        width: 30%;
+        width: 100%;
         padding: 12px 20px;
         margin: 8px 0;
         box-sizing: border-box;

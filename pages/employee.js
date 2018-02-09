@@ -58,6 +58,7 @@ export default class extends React.Component {
 
 
 render() {
+  console.log(this.props.treeData);
   return (
       <div>
         <Header url={this.props.url} title={this.props.employee.name} />
@@ -76,18 +77,27 @@ render() {
           }
         </div>
         <style jsx global> {`
-          employeeContainer {
-            display: grid;
+          #employeeContainer {
+            width:100%;
+            display: block;
+          }
+          .left{
+            width: 50%;
+            float: left;
+          }
+          .right {
+            width: 50%;
+            float: right;
           }
           #form {
-            width: 100%;
-            margin-left: 10%;
+            width: 60%;
+            padding-left: 15%;
           }
           #tree {
-            width: 45%;
+            padding-top: 5%;
+            width: 100%;
             float: right;
-            margin-top: -40%;
-            margin-right 3%;
+            margin-right: 10%;
           }
           body {
             background: #FFF;

@@ -12,19 +12,23 @@ export default class extends React.Component {
     if (req) {
       const { db } = req;
       const employeeId = query.id;
-      const employee = await db.model('Employee').findById(employeeId);
-      const supervisor = shapeEmployeeOut(data);
+      console.log('QUERY ID SSR', employeeId)
+      const employeeData = await db.model('Employee').findById(employeeId);
+      const employee = shapeEmployeeOut(data);
+      console.log(employee, 'EMPLOYEE')
       return { employee };
     }
     const employeeId = query.id;
+    console.log(query.id);
     const { data } = await axios.get(`${apiUrl}/employee/${employeeId}`);
+    console.log('DATA', data);
     const employee = data;
     return { employee };
   }
   render() {
     return (
       <div>
-        <Header url={this.props.url} title={this.props.employee.name} />
+        <Header url={this.props.url} title={this.props.employee} />
         <EmployeeForm employee={this.props.employee} />
         <style jsx global> {`
           body {
