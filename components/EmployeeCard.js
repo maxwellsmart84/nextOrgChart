@@ -9,15 +9,29 @@ export default class EmployeeCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      name: props.name,
       rank: props.rank,
-      title: '',
+      title: props.title,
       saveCall: false,
       nameInvalid: false,
+      isNotOwner: this.props.supervisor && this.props.supervisor.id !== 'None',
     }
+
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.supervisor !== undefined || 'None') {
+       this.setState({ isNotOwner: true });
+    }
+    if (nextProps.name !== this.state.name) {
+      this.setState({ name: nextProps.name })
+    }
+    if (nextProps.title !== this.state.title) {
+      this.setState({ title: nextProps.title })
+    }
   }
 
   handleChange = (event) => {
@@ -63,7 +77,7 @@ export default class EmployeeCard extends React.Component {
     return (
     <div id="formContainer">
       <h1>Edit Employee</h1>
-        <h3>Supervisor: <Link href={`/employee?id=${this.props.supervisorId ? this.props.supervisorId : this.props.url.query.id}`}><a>{this.props.supervisor ? this.props.supervisor.name : 'None'}</a></Link></h3>
+        <h3>Supervisor: {this.props.supervisor ? this.props.supervisor.name : 'None'}</h3>
       <form onSubmit={this.handleSubmit}>
         <label>
           <h3>Name: {this.props.name}</h3>
@@ -83,7 +97,9 @@ export default class EmployeeCard extends React.Component {
       </form>
         <div id="buttonBlock">
           <button id="save" onClick={(e) => this.handleSubmit(e)}>SAVE</button>
+          {this.state.isNotOwner &&
           <button id="delete" onClick={(e) => this.handleDelete(e)}>DELETE</button>
+          }
         </div>
         {savedText}
         <br />

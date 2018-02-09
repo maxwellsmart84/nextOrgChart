@@ -1,13 +1,14 @@
 import Link from 'next/link';
 
+// I removed this at the last minute but main page nav will go here
 const NavLink = (props) => (
   <div>
     <ul>
-      <li>
+      {/* <li>
         <Link as='/csv' href={`/csv`}>
-          <a>Seed Data</a>
+          <a></a>
         </Link>
-      </li>
+      </li> */}
     </ul>
     <style jsx>{`
       a {

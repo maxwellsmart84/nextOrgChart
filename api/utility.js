@@ -1,7 +1,7 @@
 
 //recurive function for assembling the d3 style tree
 exports.buildTree = function (arr) {
-  if (arr === null) {
+  if (!arr || arr.length === 0) {
     return arr;
   }
   var tree = [],
