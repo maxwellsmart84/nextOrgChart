@@ -11,7 +11,7 @@ npm install
 npm run dev
 
 
-Using The App:
+#Using The App:
 
 Click the plus sign next to a user node to start. The app currenly doesn't seed an existing user so you will need to enter or post one manually. You can promote a user if you check the supervisor box in an edit profile.
 
