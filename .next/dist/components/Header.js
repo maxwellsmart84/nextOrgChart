@@ -29,7 +29,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var _jsxFileName = '/Users/maxwellkrause/Documents/projects/atlatlEval/orgChartReactNode/components/Header.js';
 
 
-function Header(props) {
+var Header = function Header(props) {
   _react2.default.createElement('div', {
     __source: {
       fileName: _jsxFileName,
@@ -49,18 +49,22 @@ function Header(props) {
       fileName: _jsxFileName,
       lineNumber: 10
     }
+  }), _react2.default.createElement('link', { href: 'https://fonts.googleapis.com/css?family=Inconsolata', rel: 'stylesheet', __source: {
+      fileName: _jsxFileName,
+      lineNumber: 11
+    }
   })));
   return props.url.asPath === '/' ? _react2.default.createElement(_NavLink2.default, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 13
+      lineNumber: 14
     }
   }) : _react2.default.createElement(_EmployeeLink2.default, { url: props.url, __source: {
       fileName: _jsxFileName,
-      lineNumber: 13
+      lineNumber: 14
     }
   });
-}
+};
 
 exports.default = Header;
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBvbmVudHMvSGVhZGVyLmpzIl0sIm5hbWVzIjpbIkxpbmsiLCJIZWFkIiwiRW1wbG95ZWVMaW5rIiwiTmF2TGluayIsIkhlYWRlciIsInByb3BzIiwidGl0bGUiLCJ1cmwiLCJhc1BhdGgiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7QUFBQSxBQUFPOzs7O0FBQ1AsQUFBTzs7OztBQUNQLEFBQU8sQUFBa0I7Ozs7QUFDekIsQUFBTyxBQUFhOzs7Ozs7Ozs7QUFFcEIsU0FBQSxBQUFTLE9BQVQsQUFBZ0IsT0FBTyxBQUNyQjtrQkFBQSxjQUFBOztnQkFBQTtrQkFBQSxBQUNFO0FBREY7QUFBQSxxQkFDRSxBQUFDOztnQkFBRDtrQkFBQSxBQUNFO0FBREY7QUFBQSxxQkFDRSxjQUFBOztnQkFBQTtrQkFBQSxBQUFRO0FBQVI7QUFBQSxXQURGLEFBQ0UsQUFBYyxBQUNkLGdEQUFNLE1BQU4sQUFBVyxZQUFXLFNBQXRCLEFBQThCO2dCQUE5QjtrQkFISixBQUNFLEFBRUUsQUFHSjtBQUhJOztlQUdHLEFBQU0sSUFBTixBQUFVLFdBQVYsQUFBcUIsc0JBQU0sQUFBQzs7Z0JBQUQ7a0JBQTNCLEFBQTJCO0FBQUE7QUFBQSxHQUFBLENBQTNCLG1CQUF5QyxBQUFDLHdDQUFhLEtBQUssTUFBbkIsQUFBeUI7Z0JBQXpCO2tCQUFoRCxBQUFnRCxBQUNqRDtBQURpRDtHQUFBO0FBR2xEOztrQkFBQSxBQUFlIiwiZmlsZSI6IkhlYWRlci5qcyIsInNvdXJjZVJvb3QiOiIvVXNlcnMvbWF4d2VsbGtyYXVzZS9Eb2N1bWVudHMvcHJvamVjdHMvYXRsYXRsRXZhbC9vcmdDaGFydFJlYWN0Tm9kZSJ9
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBvbmVudHMvSGVhZGVyLmpzIl0sIm5hbWVzIjpbIkxpbmsiLCJIZWFkIiwiRW1wbG95ZWVMaW5rIiwiTmF2TGluayIsIkhlYWRlciIsInByb3BzIiwidGl0bGUiLCJ1cmwiLCJhc1BhdGgiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7QUFBQSxBQUFPOzs7O0FBQ1AsQUFBTzs7OztBQUNQLEFBQU8sQUFBa0I7Ozs7QUFDekIsQUFBTyxBQUFhOzs7Ozs7Ozs7QUFFcEIsSUFBTSxTQUFTLFNBQVQsQUFBUyxPQUFBLEFBQUMsT0FBVSxBQUN4QjtrQkFBQSxjQUFBOztnQkFBQTtrQkFBQSxBQUNFO0FBREY7QUFBQSxxQkFDRSxBQUFDOztnQkFBRDtrQkFBQSxBQUNFO0FBREY7QUFBQSxxQkFDRSxjQUFBOztnQkFBQTtrQkFBQSxBQUFRO0FBQVI7QUFBQSxXQURGLEFBQ0UsQUFBYyxBQUNkLGdEQUFNLE1BQU4sQUFBVyxZQUFXLFNBQXRCLEFBQThCO2dCQUE5QjtrQkFGRixBQUVFLEFBQ0E7QUFEQTs4Q0FDTSxNQUFOLEFBQVcsdURBQXNELEtBQWpFLEFBQXFFO2dCQUFyRTtrQkFKSixBQUNFLEFBR0UsQUFHSjtBQUhJOztlQUdHLEFBQU0sSUFBTixBQUFVLFdBQVYsQUFBcUIsc0JBQU0sQUFBQzs7Z0JBQUQ7a0JBQTNCLEFBQTJCO0FBQUE7QUFBQSxHQUFBLENBQTNCLG1CQUF5QyxBQUFDLHdDQUFhLEtBQUssTUFBbkIsQUFBeUI7Z0JBQXpCO2tCQUFoRCxBQUFnRCxBQUNqRDtBQURpRDtHQUFBO0FBUmxELEFBV0E7O2tCQUFBLEFBQWUiLCJmaWxlIjoiSGVhZGVyLmpzIiwic291cmNlUm9vdCI6Ii9Vc2Vycy9tYXh3ZWxsa3JhdXNlL0RvY3VtZW50cy9wcm9qZWN0cy9hdGxhdGxFdmFsL29yZ0NoYXJ0UmVhY3ROb2RlIn0=

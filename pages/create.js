@@ -29,7 +29,8 @@ export default class extends React.Component {
         <style jsx global> {`
           body {
             background: #FFF;
-            font: 1rem menlo;
+            font-size: 1rem;
+            font-family: menlo, Helvetica
             color: #fsff;
             margin: 0;
             padding: 0;

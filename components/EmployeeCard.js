@@ -12,7 +12,7 @@ export default class EmployeeCard extends React.Component {
       name: props.name || '',
       rank: props.rank,
       title: props.title || '',
-      saveCall: true,
+      saveCall: false,
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
